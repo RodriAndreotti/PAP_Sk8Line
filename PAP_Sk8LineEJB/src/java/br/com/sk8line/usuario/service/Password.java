@@ -11,20 +11,24 @@ package br.com.sk8line.usuario.service;
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
 public class Password {
-    /*
-    private $salt;
-    private $method = 'sha256';
+    
+    private String salt;
+    private String method = "sha256";
 
-    public function __construct($salt, $method = 'sha256')
+    public Password(String salt, String method)
     {
-        if (is_null($salt)) {
-            $this->salt = substr(sha1(mcrypt_create_iv(22, MCRYPT_DEV_RANDOM)), 0, 22);
+        if (salt == null) {
+            //this.salt = substr(sha1(mcrypt_create_iv(22, MCRYPT_DEV_RANDOM)), 0, 22);
         } else {
-            $this->salt = $salt;
+            this.salt = salt;
         }
-        $this->method = $method;
+        this.method = method;
     }
-
+    public Password(String salt)
+    {
+        this(salt, "sha265");
+    }
+    /*
     public function encrypt($senha)
     {
         if ($this->method == 'md5') {
