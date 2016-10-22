@@ -3,60 +3,106 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.sk8line.usuario.service;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.UnsupportedCharsetException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
- * 
+ *
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
 public class Password {
     
     private String salt;
     private String method = "sha256";
-
-    public Password(String salt, String method)
-    {
+    
+    public Password(String salt, String method) {
         if (salt == null) {
+            SecureRandom sr = new SecureRandom();
+            
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA-1");
+                
+                byte saltByte[] = new byte[20];
+                sr.nextBytes(saltByte);
+                
+                md.digest(saltByte);
+                
+                this.salt = bytesToHexString(saltByte);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Password.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+            
+            
             //this.salt = substr(sha1(mcrypt_create_iv(22, MCRYPT_DEV_RANDOM)), 0, 22);
         } else {
             this.salt = salt;
         }
         this.method = method;
     }
-    public Password(String salt)
-    {
-        this(salt, "sha265");
-    }
-    /*
-    public function encrypt($senha)
-    {
-        if ($this->method == 'md5') {
-            return md5($this->salt . $senha);
-        } elseif ($this->method == 'sha256') {
-            return hash('sha256', $this->salt . $senha);
-        } elseif ($this->method == 'bcrypt') {
-            $bcrypt = new Bcrypt();
-            $bcrypt->setCost(14);
-            return $bcrypt->create($senha);
-        }
+    
+    public Password(String salt) {
+        this(salt, "SHA-256");
     }
 
-    public function getSalt()
-    {
-        return $this->salt;
+    public Password() {
+        this(null, "SHA-256");
+    }
+    
+    
+    
+    public String getSalt() {
+        return salt;
     }
 
-    public static function generate($size)
-    {
-        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%&*() /*-+,.;/:?';
-        $pass = array(); //remember to declare $pass as an array
-        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-        for ($i = 0; $i < $size; $i++) {
-            $n = rand(0, $alphaLength);
-            $pass[] = $alphabet[$n];
+    /**
+     * Criptografa a senha utilizando um hash e um SALT
+     *
+     * @param senha senha em texto plano
+     * @return Hash da senha
+     */
+    public String encrypt(String senha) {
+        try {
+            // Cria hash (criptografia) da senha utilizando o método informado no construtor (MD5, SHA-1, SHA-256 etc.)
+            MessageDigest md = MessageDigest.getInstance(this.method);
+
+            // Concatena o SALT informado no contrutor a senha informada
+            senha = this.salt + senha;
+
+            // o método md.digest faz a criptografia da senha em formato de bytes e armazena o resultado em outro array de bytes
+            byte byteHash[] = md.digest(senha.getBytes("UTF_8"));
+
+            // Hash final da senha
+            String hash = bytesToHexString(byteHash);
+            
+            return hash;
+            
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Password.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Password.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return implode($pass); //turn the array into a string
+        
+        return null;
     }
-    */
+    
+    private String bytesToHexString(byte[] bytes) {
+        // Constrói uma string hexadecimal a partir do array de bytes acima
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : bytes) {
+            hexString.append(String.format("%02X", 0xFF & b));
+        }
+        
+        return hexString.toString();
+    }
 }

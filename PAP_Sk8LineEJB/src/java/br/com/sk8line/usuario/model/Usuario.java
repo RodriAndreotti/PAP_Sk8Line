@@ -1,6 +1,7 @@
 package br.com.sk8line.usuario.model;
 
 import java.util.Calendar;
+import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class Usuario {
     @Id
+    @Column(name = "id_usuario")
     private int id;
 
     private String email;
