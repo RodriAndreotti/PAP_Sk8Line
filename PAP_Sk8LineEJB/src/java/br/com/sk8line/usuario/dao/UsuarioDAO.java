@@ -18,21 +18,21 @@ public class UsuarioDAO {
     private EntityManager em;
 
     /**
-     * Realiza o login no banco de dados
-     * @param login
+     * Realiza o email no banco de dados
+     * @param email
      * @param senha
      * @return 
      */
-    public Usuario doLogin(String login, String senha) {
+    public Usuario doLogin(String email, String senha) {
 
-        if (this.existeUsuario(login)) {
-            String salt = this.obterSalt(login);
+        if (this.existeUsuario(email)) {
+            String salt = this.obterSalt(email);
 
             Password passwd = new Password(salt);
 
             String hash = passwd.encrypt(senha);
 
-            // SELECT * FROM usuario WHERE login = login AND senha = hash AND ativo = 1
+            // SELECT * FROM usuario WHERE email = email AND senha = hash AND ativo = 1
             return new Usuario();
         }
 

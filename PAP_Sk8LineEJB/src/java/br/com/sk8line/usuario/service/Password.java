@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class Password {
     
     private String salt;
-    private String method = "sha256";
+    private String method;
     
     public Password(String salt, String method) {
         if (salt == null) {
@@ -36,6 +36,7 @@ public class Password {
                 md.digest(saltByte);
                 
                 this.salt = bytesToHexString(saltByte);
+
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(Password.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -79,7 +80,7 @@ public class Password {
             senha = this.salt + senha;
 
             // o método md.digest faz a criptografia da senha em formato de bytes e armazena o resultado em outro array de bytes
-            byte byteHash[] = md.digest(senha.getBytes("UTF_8"));
+            byte byteHash[] = md.digest(senha.getBytes("UTF-8"));
 
             // Hash final da senha
             String hash = bytesToHexString(byteHash);
