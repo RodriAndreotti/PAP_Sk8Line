@@ -5,17 +5,25 @@
  */
 package br.com.sk8line.usuario.dao;
 
+import br.com.sk8line.common.dao.DAO;
 import br.com.sk8line.usuario.model.Usuario;
+import br.com.sk8line.usuario.model.Usuario_;
 import br.com.sk8line.usuario.service.Password;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
-public class UsuarioDAO {
+public class UsuarioDAO  extends DAO {
 
-    private EntityManager em;
+    
 
     /**
      * Realiza o email no banco de dados
@@ -23,6 +31,8 @@ public class UsuarioDAO {
      * @param senha
      * @return 
      */
+    
+    
     public Usuario doLogin(String email, String senha) {
 
         if (this.existeUsuario(email)) {
@@ -42,11 +52,19 @@ public class UsuarioDAO {
 
     /**
      * Verifica se o usuário existe no banco de dados
-     * @param login
+     * @param email
      * @return 
      */
-    private boolean existeUsuario(String login) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean existeUsuario(String email) {
+         CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Usuario> cq = cb.createQuery(Usuario.class);
+        Root<Usuario> user = cq.from(Usuario.class);
+        cq.where(cb.equal(user.get(Usuario_.email), email));
+        
+        List<Usuario> results = this.getEntityManager().createQuery(cq).getResultList();
+        
+        return !results.isEmpty();       
+        
     }
 
     /**
@@ -54,7 +72,7 @@ public class UsuarioDAO {
      * @param login
      * @return 
      */
-    private String obterSalt(String login) {
+    private String obterSalt(String email) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

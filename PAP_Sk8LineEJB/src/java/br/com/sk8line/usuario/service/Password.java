@@ -40,11 +40,6 @@ public class Password {
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(Password.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
-            
-            
-            //this.salt = substr(sha1(mcrypt_create_iv(22, MCRYPT_DEV_RANDOM)), 0, 22);
         } else {
             this.salt = salt;
         }

@@ -8,18 +8,18 @@
             <web-module-libraries/>
             <web-module-additional-libraries>
                 <library>
-                    <file>${reference.PAP_Sk8Line.dist-ear}</file>
+                    <file>${reference.PAP_Sk8LineEJB.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.PAP_Sk8LineEJB.dist-ear}</file>
+                    <file>${reference.PAP_Sk8Line_JSF.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
             </web-module-additional-libraries>
         </data>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">
             <reference>
-                <foreign-project>PAP_Sk8Line</foreign-project>
+                <foreign-project>PAP_Sk8LineEJB</foreign-project>
                 <artifact-type>j2ee_ear_archive</artifact-type>
                 <script>build.xml</script>
                 <target>dist-ear</target>
@@ -27,7 +27,7 @@
                 <id>dist-ear</id>
             </reference>
             <reference>
-                <foreign-project>PAP_Sk8LineEJB</foreign-project>
+                <foreign-project>PAP_Sk8Line_JSF</foreign-project>
                 <artifact-type>j2ee_ear_archive</artifact-type>
                 <script>build.xml</script>
                 <target>dist-ear</target>
