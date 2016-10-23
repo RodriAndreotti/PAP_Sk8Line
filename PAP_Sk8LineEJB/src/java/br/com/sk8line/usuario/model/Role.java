@@ -1,5 +1,6 @@
 package br.com.sk8line.usuario.model;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 

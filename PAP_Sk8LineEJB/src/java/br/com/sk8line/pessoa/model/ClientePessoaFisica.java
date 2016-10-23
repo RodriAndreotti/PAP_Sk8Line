@@ -1,11 +1,18 @@
 package br.com.sk8line.pessoa.model;
 
 import br.com.sk8line.common.model.Endereco;
-import br.com.sk8line.common.model.Endereco;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
+@AttributeOverride(name = "id", column = @Column(name = "id_revendedor"))
+@SequenceGenerator(name = "PFSEQ", allocationSize = 1)
 public class ClientePessoaFisica extends PessoaFisica {
 
     private String RazaoSocial;
@@ -30,6 +37,14 @@ public class ClientePessoaFisica extends PessoaFisica {
 
     public void apagar() {
 
+    }
+    
+    
+    @Override
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "PFSEQ")
+    public int getId() {
+        return super.getId();
     }
 
 }

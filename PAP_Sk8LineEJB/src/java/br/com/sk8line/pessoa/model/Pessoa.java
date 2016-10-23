@@ -9,12 +9,13 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.SequenceGenerator;
 
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
+
 public abstract class Pessoa implements Cadastro {
 
-    @Id
     private int id;
 
     private String nome;
@@ -59,5 +60,48 @@ public abstract class Pessoa implements Cadastro {
     public void apagar() {
 
     }
+
+    @Id
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public ArrayList getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(ArrayList enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 
 }

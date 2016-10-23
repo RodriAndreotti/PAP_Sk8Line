@@ -3,19 +3,31 @@ package br.com.sk8line.produto.model;
 
 
 import br.com.sk8line.garantia.model.TermoGarantia;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 @Entity
+@SequenceGenerator(name = "ProdutoSEQ", allocationSize = 1)
 public class Produto implements CadastroProduto {
 
     @Id
+    @Column(name="id_produto")
+    @GeneratedValue(generator = "ProdutoSEQ", strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nome;
 
     private String descricao;
 
+
+    @JoinTable(name = "produto_termo_garantia")
+    @Column(name="termo_garantia")
     private TermoGarantia termoGarantia;
 
     private double largura;
