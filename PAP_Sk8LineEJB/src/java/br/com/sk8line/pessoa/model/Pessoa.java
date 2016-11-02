@@ -7,9 +7,15 @@ import br.com.sk8line.usuario.model.Usuario;
 import java.util.ArrayList;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
@@ -24,6 +30,7 @@ public abstract class Pessoa implements Cadastro {
 
     private ArrayList enderecos;
 
+    
     private Usuario usuario;
 
     /**
@@ -86,7 +93,8 @@ public abstract class Pessoa implements Cadastro {
         this.telefone = telefone;
     }
 
-    public ArrayList getEnderecos() {
+    
+    public ArrayList<Endereco> getEnderecos() {
         return enderecos;
     }
 
@@ -94,6 +102,8 @@ public abstract class Pessoa implements Cadastro {
         this.enderecos = enderecos;
     }
 
+    @OneToOne
+    @JoinColumn(name = "usuario")
     public Usuario getUsuario() {
         return usuario;
     }

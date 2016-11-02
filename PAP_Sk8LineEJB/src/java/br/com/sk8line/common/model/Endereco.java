@@ -4,6 +4,9 @@ package br.com.sk8line.common.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Endereco {
@@ -22,6 +25,8 @@ public class Endereco {
 
     private String cidade;
 
+    @OneToOne
+    @JoinTable(name="estado", joinColumns = {@JoinColumn(name="id")})
     private Estado estado;
 
     private String cep;

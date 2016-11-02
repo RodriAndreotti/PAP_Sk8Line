@@ -1,6 +1,7 @@
-package br.com.sk8line.pessoa.model;
+package br.com.sk8line.pessoa.revendedor.model;
 
 import br.com.sk8line.common.model.Endereco;
+import br.com.sk8line.pessoa.model.PessoaJuridica;
 import br.com.sk8line.usuario.model.Usuario;
 import java.util.ArrayList;
 import javax.persistence.AttributeOverride;
@@ -12,16 +13,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@AttributeOverride(name = "id", column = @Column(name = "id_colaborador"))
-@SequenceGenerator(name = "ColabSEQ", allocationSize = 1)
-public class Colaborador extends PessoaFisica {
-
-    private String cargo;
+@AttributeOverride(name = "id", column = @Column(name = "id_revendedor"))
+@SequenceGenerator(name = "RevSEQ", allocationSize = 1)
+public class Revendedor extends PessoaJuridica {
 
     public void addEndereco(Endereco endereco) {
 
@@ -44,24 +45,25 @@ public class Colaborador extends PessoaFisica {
     }
 
     @Override
-    @OneToOne
-    @JoinColumn(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "RevSEQ")
+    public int getId() {
+        return super.getId();
+    }
+
+    @OneToOne(mappedBy = "usuario", targetEntity = Usuario.class)
     public Usuario getUsuario() {
         return super.getUsuario(); 
     }
 
-    
     @Override
-    @OneToMany(mappedBy = "id_colaborador", targetEntity = Endereco.class)
-    @ElementCollection(targetClass = Endereco.class)
+    @OneToMany
+    @JoinTable(name="revendedor_endereco", joinColumns = {@JoinColumn(name = "revendedor", referencedColumnName = "id")})
+    @ElementCollection(targetClass = EnderecoRevendedor.class)
     public ArrayList<Endereco> getEnderecos() {
         return super.getEnderecos(); //To change body of generated methods, choose Tools | Templates.
     }
     
-    @Override
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "ColabSEQ")
-    public int getId() {
-        return super.getId();
-    }
+    
+    
 }

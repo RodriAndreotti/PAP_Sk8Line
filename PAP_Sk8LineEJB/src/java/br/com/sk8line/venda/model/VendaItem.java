@@ -4,10 +4,8 @@ import br.com.sk8line.produto.model.Produto;
 import java.math.BigDecimal;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,10 +14,10 @@ public class VendaItem {
     @EmbeddedId
     private VendaPK PK;
 
-    @ManyToOne
-    @JoinColumn(name = "venda", nullable = false)
+    @OneToOne
     private Venda venda;
 
+    @OneToOne
     private Produto produto;
 
     private int quantidade;

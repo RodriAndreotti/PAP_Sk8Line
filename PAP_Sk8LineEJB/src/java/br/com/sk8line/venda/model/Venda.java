@@ -8,21 +8,33 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 import static javax.persistence.CascadeType.ALL;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 @Entity
+@SequenceGenerator(name = "VendaSEQ", allocationSize = 1)
 public class Venda {
 
     @Id
+    @GeneratedValue(generator = "VendaSEQ", strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToOne
+    @JoinColumn(name = "id")
     private Usuario vendedor;
 
+    @OneToOne
+    @JoinColumn(name = "id")
     private Usuario cliente;
 
     private BigDecimal valorTotal;
@@ -37,9 +49,13 @@ public class Venda {
 
     private Calendar dataVenda;
 
+    @OneToOne
+    @JoinColumn(name = "id")
     private Endereco enderecoEntrega;
 
     
+    @OneToMany(cascade=ALL, mappedBy = "venda")
+    @ElementCollection(targetClass = VendaItem.class)
     private List<VendaItem> produtos;
 
     public boolean adicionarProduto(Produto produto) {
@@ -134,8 +150,6 @@ public class Venda {
         this.enderecoEntrega = enderecoEntrega;
     }
 
-    @OneToMany(cascade=ALL, mappedBy="vendaitem")
-    @JoinTable(name = "venda_produto", joinColumns = {@JoinColumn(name="venda")})
     public List<VendaItem> getProdutos() {
         return produtos;
     }
