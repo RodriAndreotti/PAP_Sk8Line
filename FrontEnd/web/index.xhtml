@@ -9,14 +9,21 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:outputText>Novo texto para commit</h:outputText>
-        <h:outputText>Novo texto para commit 2 </h:outputText>
-        <h:outputText>Novo texto para commit 3</h:outputText>
-        <h:outputText>Novo texto para commit 4 Teste Commit</h:outputText>
+        <h3>Usuário</h3>
+        <h:form id="frmLogin">
+            <h:messages/>
+            <p>
+                <p:outputLabel value="E-mail"/>
+                <p:inputText id="txtEmail" value="#{authMB.email}"/>
+            </p>
+            <p>
+                <p:outputLabel value="Senha"/>
+                <p:password id="txtSenha" value="#{authMB.senha}"/>
+            </p>
+            <h:commandButton value="Entrar" action="#{authMB.doLogin()}"/>
+            <p:commandButton value="Cancelar" id="cancelar"  />
+        </h:form>
 
-
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Página de boas-vindas do Primefaces" />
     </h:body>
 </html>
 

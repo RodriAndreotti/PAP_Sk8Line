@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+
+
+                <p:layoutUnit position="center">
+                    <script>
+
+                        function  verificarNome() {
+                            var nomeEntrada = document.getElementById("name").value;
+                            if (nomeEntrada === null) {
+                                alert("campo vazio");
+                            }
+
+                        }
+
+
+                    </script>
+
+                    <h:form id="form">
+                        <p:panel header="CADASTRO CLIENTE">
+
+                            <h:panelGrid columns="2">
+
+                                <h:outputLabel value="NOME:" for="nome" />
+                                <p:inputText id="name" label="nome" value="" maxlength="50" size="40" />
+
+
+                                <h:outputLabel value="TIPO DE DOCUMENTO:"  for="cpf-cnpj"/>                              
+                                <h:selectOneRadio id="cpf-cnpj" label="cpf-cnpj" >
+                                    <f:selectItem itemLabel="CNPJ" />
+                                    <f:selectItem itemLabel="CPF" />                     
+                                </h:selectOneRadio>
+
+                                <h:outputLabel value="CPF:" for="cpf" />
+                                <p:inputText id="cpf" label="cpf" value="" maxlength="12" size="20"  />                    
+
+                                <h:outputLabel value="CNPJ:" for="cnpj" />
+                                <p:inputText id="cnpj" label="cnpj" value="" maxlength="14" size="20"  />
+
+
+                                <h:outputLabel value="ENDEREÇO:" for="end" />
+                                <p:inputText id="end" label="end" value="" maxlength="50" size="40"  />
+                                <h:outputLabel value="NÚMERO" for="nro" />
+                                <p:inputText id="nro" label="nro" value="" maxlength="6" size="2"  />
+
+
+                                <h:outputLabel value="TELEFONE:" for="tel" />
+                                <p:inputText id="tel" label="tel" value="" maxlength="12" size="20"  />
+
+
+                                <h:outputLabel value="ESTADO" for="estado" />
+                                <p:inputText id="estado" label="estado" value="" maxlength="20" size="40"  />
+                                <h:outputLabel value="UF:" for="uf" />
+                                <p:inputText id="uf" label="uf" value="" maxlength="2" size="1"  />
+
+
+                                <h:outputLabel value="MUNICÍPIO:" for="mun" />
+                                <p:inputText id="mun" label="mun" value="" maxlength="30" size="20"  />
+
+
+                                <h:column>
+                                    <p:commandButton  value="SALVAR" title="Salvar" onclick="verificarNome()"/>
+                                    <p:commandButton  value="EDITAR" title="Editar"/>
+                                    <p:commandButton value="EXCLUIR" title="Excluir"/>
+                                </h:column>
+
+                            </h:panelGrid>     
+                        </p:panel>
+                    </h:form>   
+                    <!-- Abaixo temos um modal de confirmação de exclusão repare que ele é fora do form principal, pois se colocarmos dentro podemos ter alguns problemas com isso.-->
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

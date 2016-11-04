@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -21,18 +22,15 @@ import javax.persistence.criteria.Root;
  *
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
-public class UsuarioDAO  extends DAO {
-
-    
+public class UsuarioDAO extends DAO {
 
     /**
      * Realiza o email no banco de dados
+     *
      * @param email
      * @param senha
-     * @return 
+     * @return
      */
-    
-    
     public Usuario doLogin(String email, String senha) {
 
         if (this.existeUsuario(email)) {
@@ -52,25 +50,31 @@ public class UsuarioDAO  extends DAO {
 
     /**
      * Verifica se o usuário existe no banco de dados
+     *
      * @param email
-     * @return 
+     * @return
      */
     public boolean existeUsuario(String email) {
-         CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
+        CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Usuario> cq = cb.createQuery(Usuario.class);
         Root<Usuario> user = cq.from(Usuario.class);
-        cq.where(cb.equal(user.get(Usuario_.email), email));
         
-        List<Usuario> results = this.getEntityManager().createQuery(cq).getResultList();
+        TypedQuery<Usuario> typedQuery = this.getEntityManager().createQuery(
+                cq.select(user)
+                .where(cb.like(user.<String>get("email"), email))
+        );
         
-        return !results.isEmpty();       
-        
+
+        List<Usuario> results = typedQuery.getResultList();
+
+        return !results.isEmpty();
     }
 
     /**
      * Obtém o salt para o usuário
+     *
      * @param login
-     * @return 
+     * @return
      */
     private String obterSalt(String email) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -2,20 +2,13 @@ package br.com.sk8line.pessoa.model;
 
 import br.com.sk8line.common.model.Endereco;
 import br.com.sk8line.usuario.model.Usuario;
-import br.com.sk8line.usuario.model.Usuario;
-import br.com.sk8line.usuario.model.Usuario;
 import java.util.ArrayList;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Transient;
 
 @MappedSuperclass
 @Access(AccessType.PROPERTY)

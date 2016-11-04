@@ -1,14 +1,37 @@
 package br.com.sk8line.usuario.model;
 
-import javax.persistence.Embeddable;
+import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
-public class Role {
+@SequenceGenerator(name = "RoleSEQ", allocationSize = 1)
+public class Role implements Serializable {
     @Id
+    @GeneratedValue(generator = "RoleSEQ", strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nome;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    
 
 }
