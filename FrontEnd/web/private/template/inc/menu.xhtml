@@ -25,13 +25,14 @@
                         </p:submenu>
                     </p:submenu>
                     <p:submenu label="Produtos">
-                        <p:menuitem value="Novo" ajax="false"/>
-                        <p:menuitem value="Listar" ajax="false"/>
+                        <p:menuitem value="Novo" ajax="false" url="/faces/private/produto/editar.xhtml"/>
+                        <p:menuitem value="Listar" ajax="false" url="/faces/private/produto/listar.xhtml"/>
+                        <p:menuitem value="Consultar Estoque" ajax="false"/>
                         <p:menuitem value="Inserir Estoque" ajax="false"/>
                     </p:submenu>
                     <p:submenu label="Garantia">
-                        <p:menuitem value="Novo Termo" ajax="false"/>
-                        <p:menuitem value="Listar Termos" ajax="false"/>
+                        <p:menuitem value="Novo Termo" ajax="false" url="/faces/private/termo/editar.xhtml"/>
+                        <p:menuitem value="Listar Termos" ajax="false" url="/faces/private/termo/listar.xhtml"/>
                         <p:menuitem value="Acionar Garantia" ajax="false"/>
                     </p:submenu>
                     <p:submenu label="Vendas">

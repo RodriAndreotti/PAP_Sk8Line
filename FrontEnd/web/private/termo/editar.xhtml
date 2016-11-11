@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <h:body>
+        <ui:composition template="/private/template/template.xhtml">
+            <ui:define name="content">
+
+                <h3>Termos de Garantia</h3>
+
+                <h:form id="frmProduto">
+                    <h:inputHidden id="txtId" value="#{termoMB.termo.id}"/>
+                    <p>
+                        <p:outputLabel for="txtPeriodo" value="Período (em meses)"/>
+                        <p:inputText id="txtPeriodo" value="#{termoMB.termo.periodo}" class="form-control"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="txtTermos" value="Termos da Garantia"/>
+                        <p:inputTextarea id="txtTermos" value="#{termoMB.termo.termos}" class="form-control"/>
+                    </p>
+                    <p:commandButton value="Salvar" action="#{termoMB.salvar()}" ajax="false"/>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

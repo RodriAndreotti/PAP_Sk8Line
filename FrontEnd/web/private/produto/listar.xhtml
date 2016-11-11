@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="/private/template/template.xhtml">
+            <ui:define name="content">
+                
+                <h3>Produtos</h3>
+                <p:dataTable var="produto" value="#{produtoMB.produtos}" class="table table-responsive table-hover">
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{produto.nome}"/>
+                    </p:column>
+                    <p:column headerText="Largura">
+                        <h:outputText value="#{produto.largura}"/>
+                    </p:column>
+                    <p:column headerText="Altura">
+                        <h:outputText value="#{produto.altura}"/>
+                    </p:column>
+                    <p:column headerText="Comprimento">
+                        <h:outputText value="#{produto.comprimento}"/>
+                    </p:column>
+                    <p:column headerText="Valor">
+                        <h:outputText value="#{produto.valor}"/>
+                    </p:column>
+                    <p:column headerText="">
+                        <h:form>
+                            <p:commandButton class="btn btn-info" value="Editar" action="#{produtoMB.editar(produto)}"/>
+                            <p:commandButton class="btn btn-danger" value="Apagar" action="#{produtoMB.apagar(produto)}"/>
+                        </h:form>
+                    </p:column>
+                </p:dataTable>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

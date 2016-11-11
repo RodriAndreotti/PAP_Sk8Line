@@ -16,5 +16,16 @@ nav#menu ul > li {
 }
 
 #conteudo {
+    margin-top: 10px;
     min-height: 350px !important;
+}
+
+.pull-right {
+    float: right;
+}
+.pull-right:before, 
+.pull-right:after {
+    display: block;
+    content: " ";
+    clear: both;
 }

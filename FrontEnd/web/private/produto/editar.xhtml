@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <h:body>
+        <ui:composition template="/private/template/template.xhtml">
+            <ui:define name="content">
+
+                <h3>Produtos</h3>
+
+                <h:form id="frmProduto">
+                    <h:inputHidden id="txtId" value="#{produtoMB.produto.id}"/>
+                    <p>
+                        <p:outputLabel for="txtNome" value="Nome"/>
+                        <p:inputText id="txtNome" value="#{produtoMB.produto.nome}" class="form-control"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="txtLargura" value="Largura"/>
+                        <p:inputText id="txtLargura" value="#{produtoMB.produto.largura}" class="form-control"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="txtAltura" value="Altura"/>
+                        <p:inputText id="txtAltura" value="#{produtoMB.produto.altura}" class="form-control"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="txtComprimento" value="Comprimento"/>
+                        <p:inputText id="txtComprimento" value="#{produtoMB.produto.comprimento}" class="form-control"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="txtValor" value="Comprimento"/>
+                        <p:inputText id="txtValor" value="#{produtoMB.produto.valor}" class="form-control"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="lstTermoGarantia" value="Termo de Garantia"/>
+                        <p:selectOneMenu id="lstTermoGarantia" value="#{produtoMB.produto.termoGarantia}" class="form-control"/>
+                    </p>
+                    <p>
+                        <p:outputLabel for="txtDescricao" value="Descrição"/>
+                        <p:inputTextarea id="txtDescricao" value="#{produtoMB.produto.descricao}" class="form-control"/>
+                    </p>
+                    
+                    <p:commandButton value="Salvar" action="#{produtoMB.salvar()}" ajax="false"/>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

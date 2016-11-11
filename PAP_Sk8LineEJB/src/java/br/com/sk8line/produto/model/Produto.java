@@ -11,13 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name = "ProdutoSEQ", allocationSize = 1)
-public class Produto implements CadastroProduto, Serializable {
+public class Produto implements Serializable {
     
     
     @Id
@@ -43,20 +42,72 @@ public class Produto implements CadastroProduto, Serializable {
 
     private double valor;
 
-    public void cadastrar() {
 
+
+    public int getId() {
+        return id;
     }
 
-    public void editar() {
-
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void apagar() {
-
+    public String getNome() {
+        return nome;
     }
 
-    public void alterarPreco() {
-
+    public void setNome(String nome) {
+        this.nome = nome;
     }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public TermoGarantia getTermoGarantia() {
+        return termoGarantia;
+    }
+
+    public void setTermoGarantia(TermoGarantia termoGarantia) {
+        this.termoGarantia = termoGarantia;
+    }
+
+    public double getLargura() {
+        return largura;
+    }
+
+    public void setLargura(double largura) {
+        this.largura = largura;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public double getComprimento() {
+        return comprimento;
+    }
+
+    public void setComprimento(double comprimento) {
+        this.comprimento = comprimento;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+    
+    
 
 }
