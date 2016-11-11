@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.spi.PersistenceProvider;
 import javax.persistence.spi.PersistenceUnitInfo;
 import javax.persistence.spi.ProviderUtil;
@@ -39,5 +40,9 @@ public abstract class DAO {
         
 
         return this.em;
+    }
+    
+    protected CriteriaBuilder getCriteriaBuilder(){
+        return this.getEntityManager().getCriteriaBuilder();
     }
 }

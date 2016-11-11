@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition >
+            <h:form>
+                <p:menubar>
+                    <p:submenu label="Pessoas">
+                        <p:submenu label="Revendedores">
+                            <p:menuitem  value="Listar" ajax="false"/>
+                            <p:menuitem  value="Novo" ajax="false"/>
+                        </p:submenu>
+                        <p:submenu label="Clientes">
+                            <p:menuitem  value="Listar" ajax="false"/>
+                            <p:menuitem  value="Novo" ajax="false" url="/faces/private/editCliente.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Colaboradores">
+                            <p:menuitem  value="Listar" ajax="false"/>
+                            <p:menuitem  value="Novo" ajax="false"/>
+                        </p:submenu>
+                    </p:submenu>
+                    <p:submenu label="Produtos">
+                        <p:menuitem value="Novo" ajax="false"/>
+                        <p:menuitem value="Listar" ajax="false"/>
+                        <p:menuitem value="Inserir Estoque" ajax="false"/>
+                    </p:submenu>
+                    <p:submenu label="Garantia">
+                        <p:menuitem value="Novo Termo" ajax="false"/>
+                        <p:menuitem value="Listar Termos" ajax="false"/>
+                        <p:menuitem value="Acionar Garantia" ajax="false"/>
+                    </p:submenu>
+                    <p:submenu label="Vendas">
+                        <p:menuitem value="Listar" ajax="false"/>
+                        <p:menuitem value="Nova Venda" ajax="false"/>
+                    </p:submenu>
+                    <p:submenu label="Relatórios">
+                        <p:menuitem value="Vendas" ajax="false"/>
+                        <p:menuitem value="Garantia" ajax="false"/>
+                    </p:submenu>
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{authMB.doLogoff()}" ajax="false"/>
+                </p:menubar>
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>

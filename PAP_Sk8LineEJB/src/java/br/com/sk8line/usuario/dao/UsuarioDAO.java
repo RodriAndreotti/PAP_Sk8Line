@@ -7,12 +7,8 @@ package br.com.sk8line.usuario.dao;
 
 import br.com.sk8line.common.dao.DAO;
 import br.com.sk8line.usuario.model.Usuario;
-import br.com.sk8line.usuario.model.Usuario_;
 import br.com.sk8line.usuario.service.Password;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -34,14 +30,39 @@ public class UsuarioDAO extends DAO {
     public Usuario doLogin(String email, String senha) {
 
         if (this.existeUsuario(email)) {
-            String salt = this.obterSalt(email);
+            String salt;
+            salt = this.obterSalt(email);
 
             Password passwd = new Password(salt);
 
             String hash = passwd.encrypt(senha);
 
+            // Realiza a consulta
+            Usuario usuario;
+
+            CriteriaBuilder builder = this.getCriteriaBuilder();
+            CriteriaQuery<Usuario> userQuery = builder.createQuery(Usuario.class);
+            Root<Usuario> user = userQuery.from(Usuario.class);
+
+            try {
+
+                TypedQuery<Usuario> typedQuery = this.getEntityManager().createQuery(
+                        userQuery
+                                .where(
+                                        builder.like(user.<String>get("email"), email),
+                                        builder.like(user.<String>get("senha"), hash)
+                                )
+                );
+
+                usuario = typedQuery.getSingleResult();
+            } catch (NoResultException ex) {
+                usuario = null;
+            }
+
+            return usuario;
+
             // SELECT * FROM usuario WHERE email = email AND senha = hash AND ativo = 1
-            return new Usuario();
+            /* return new Usuario(); */
         }
 
         return null;
@@ -55,19 +76,23 @@ public class UsuarioDAO extends DAO {
      * @return
      */
     public boolean existeUsuario(String email) {
-        CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<Usuario> cq = cb.createQuery(Usuario.class);
-        Root<Usuario> user = cq.from(Usuario.class);
-        
-        TypedQuery<Usuario> typedQuery = this.getEntityManager().createQuery(
-                cq.select(user)
-                .where(cb.like(user.<String>get("email"), email))
+        long count = 0l;
+        CriteriaBuilder builder = this.getCriteriaBuilder();
+
+        CriteriaQuery<Long> cnt = builder.createQuery(Long.class);
+        Root<?> root = cnt.from(Usuario.class);
+        Root<Usuario> user = cnt.from(Usuario.class);
+
+        cnt.select(builder.count(root));
+
+        TypedQuery<Long> typedQuery = this.getEntityManager().createQuery(
+                cnt.select(builder.count(root))
+                        .where(builder.like(user.<String>get("email"), email))
         );
-        
 
-        List<Usuario> results = typedQuery.getResultList();
+        count = typedQuery.getSingleResult();
 
-        return !results.isEmpty();
+        return count > 0;
     }
 
     /**
@@ -77,6 +102,19 @@ public class UsuarioDAO extends DAO {
      * @return
      */
     private String obterSalt(String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        //throw new UnsupportedOperationException("Não suportado ainda."); //To change body of generated methods, choose Tools | Templates.
+        CriteriaBuilder builder = this.getCriteriaBuilder();
+        CriteriaQuery<String> saltQuery = builder.createQuery(String.class);
+
+        Root<?> root = saltQuery.from(Usuario.class);
+
+        TypedQuery<String> typedQuery = this.getEntityManager().createQuery(
+                saltQuery.select(root.get("salt").as(String.class))
+                        .where(builder.like(root.<String>get("email"), email))
+        );
+        String salt = typedQuery.getSingleResult();
+
+        return salt;
     }
 }

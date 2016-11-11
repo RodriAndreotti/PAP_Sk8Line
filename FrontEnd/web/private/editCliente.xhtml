@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="/private/template/template.xhtml">
+            <ui:define name="content">
+                <script type="text/javascript">
+
+                    function  verificarNome() {
+                        var nomeEntrada = document.getElementById("name").value;
+                        if (nomeEntrada === null) {
+                            alert("campo vazio");
+                        }
+
+                    }
+
+
+                </script>
+
+                <h:form id="form">
+                    <p:panel header="CADASTRO CLIENTE">
+
+                        <h:panelGrid columns="2">
+
+                            <h:outputLabel value="NOME:" for="nome" />
+                            <p:inputText id="name" label="nome" value="" maxlength="50" size="40" />
+
+
+                            <h:outputLabel value="TIPO DE DOCUMENTO:"  for="cpf-cnpj"/>                              
+                            <h:selectOneRadio id="cpf-cnpj" label="cpf-cnpj" >
+                                <f:selectItem itemLabel="CNPJ" />
+                                <f:selectItem itemLabel="CPF" />                     
+                            </h:selectOneRadio>
+
+                            <h:outputLabel value="CPF:" for="cpf" />
+                            <p:inputText id="cpf" label="cpf" value="" maxlength="12" size="20"  />                    
+
+                            <h:outputLabel value="CNPJ:" for="cnpj" />
+                            <p:inputText id="cnpj" label="cnpj" value="" maxlength="14" size="20"  />
+
+
+                            <h:outputLabel value="ENDEREÇO:" for="end" />
+                            <p:inputText id="end" label="end" value="" maxlength="50" size="40"  />
+                            <h:outputLabel value="NÚMERO" for="nro" />
+                            <p:inputText id="nro" label="nro" value="" maxlength="6" size="2"  />
+
+
+                            <h:outputLabel value="TELEFONE:" for="tel" />
+                            <p:inputText id="tel" label="tel" value="" maxlength="12" size="20"  />
+
+
+                            <h:outputLabel value="ESTADO" for="estado" />
+                            <p:inputText id="estado" label="estado" value="" maxlength="20" size="40"  />
+                            <h:outputLabel value="UF:" for="uf" />
+                            <p:inputText id="uf" label="uf" value="" maxlength="2" size="1"  />
+
+
+                            <h:outputLabel value="MUNICÍPIO:" for="mun" />
+                            <p:inputText id="mun" label="mun" value="" maxlength="30" size="20"  />
+
+
+                            <h:column>
+                                <p:commandButton  value="SALVAR" title="Salvar" onclick="verificarNome()"/>
+                                <p:commandButton  value="EDITAR" title="Editar"/>
+                                <p:commandButton value="EXCLUIR" title="Excluir"/>
+                            </h:column>
+
+                        </h:panelGrid>     
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>
+

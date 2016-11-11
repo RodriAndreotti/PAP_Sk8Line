@@ -1,6 +1,7 @@
 package br.com.sk8line.usuario.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 public class Role implements Serializable {
     @Id
     @GeneratedValue(generator = "RoleSEQ", strategy = GenerationType.IDENTITY)
+    @Column(name="id_role")
     private int id;
 
     private String nome;
