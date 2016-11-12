@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.sk8line.garantia.dao.ejb;
+package br.com.sk8line.garantia.ejb;
 
 import br.com.sk8line.garantia.model.TermoGarantia;
 import br.com.sk8line.produto.model.Produto;

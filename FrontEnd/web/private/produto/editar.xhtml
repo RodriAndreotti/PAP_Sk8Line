@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      >
+          
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
@@ -31,15 +32,17 @@
                         <p:inputText id="txtComprimento" value="#{produtoMB.produto.comprimento}" class="form-control"/>
                     </p>
                     <p>
-                        <p:outputLabel for="txtValor" value="Comprimento"/>
+                        <p:outputLabel for="txtValor" value="Valor"/>
                         <p:inputText id="txtValor" value="#{produtoMB.produto.valor}" class="form-control"/>
                     </p>
                     <p>
                         <p:outputLabel for="lstTermoGarantia" value="Termo de Garantia"/>
-                        <p:selectOneMenu id="lstTermoGarantia" value="#{produtoMB.produto.termoGarantia}" class="form-control"/>
+                        <p:selectOneMenu id="lstTermoGarantia" value="#{produtoMB.produto.termoGarantia}" class="form-control">
+                           
+                        </p:selectOneMenu>
                     </p>
                     <p>
-                        <p:outputLabel for="txtDescricao" value="Descrição"/>
+                        <p:outputLabel for="txtDescricao" value="Descrição"/><br/>
                         <p:inputTextarea id="txtDescricao" value="#{produtoMB.produto.descricao}" class="form-control"/>
                     </p>
                     

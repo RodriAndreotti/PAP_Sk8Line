@@ -8,6 +8,8 @@ package br.com.sk8line.produto.dao;
 import br.com.sk8line.common.dao.DAO;
 import br.com.sk8line.produto.model.Produto;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.NotFoundException;
 
 /**
@@ -35,7 +37,7 @@ public class ProdutoDAO extends DAO {
      * @return
      */
     public static ProdutoDAO getInstance() {
-        if (instance == null) {
+        if (instance == null || !(instance instanceof ProdutoDAO)) {
             instance = new ProdutoDAO();
         }
 
@@ -70,7 +72,9 @@ public class ProdutoDAO extends DAO {
      * @return 
      */
     public List<Produto> listar() {
-        return this.getEntityManager().createQuery("SELECT p FROM Produto p", Produto.class).getResultList();
+        EntityManager em = this.getEntityManager();
+        TypedQuery query = em.createQuery("SELECT p FROM Produto p", Produto.class);
+        return query.getResultList();
     }
 
     /**

@@ -13,8 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "produto")
 @SequenceGenerator(name = "ProdutoSEQ", allocationSize = 1)
 public class Produto implements Serializable {
     

@@ -28,13 +28,13 @@ public class ProdutoMB {
     @EJB
     private ProdutoRemote ejb;
     private List<Produto> produtos = new ArrayList();
-    private Produto produto;
+    private Produto produto = new Produto();
     
     
-    /*@PostConstruct
+    @PostConstruct
     public void init() {
         this.produtos = ejb.listar();
-    }*/
+    }
 
     public List<Produto> getProdutos() {
         return produtos;

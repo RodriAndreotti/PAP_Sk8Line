@@ -6,7 +6,7 @@
 package br.com.sk8line.garantia.bean;
 
 
-import br.com.sk8line.garantia.dao.ejb.TermoRemote;
+import br.com.sk8line.garantia.ejb.TermoRemote;
 import br.com.sk8line.garantia.model.TermoGarantia;
 import java.util.ArrayList;
 import java.util.List;

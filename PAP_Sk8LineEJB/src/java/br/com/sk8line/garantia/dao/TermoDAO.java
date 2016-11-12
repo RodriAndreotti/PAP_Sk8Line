@@ -8,7 +8,6 @@ package br.com.sk8line.garantia.dao;
 import br.com.sk8line.common.dao.DAO;
 import br.com.sk8line.garantia.model.TermoGarantia;
 import java.util.List;
-import javax.management.RuntimeErrorException;
 import javax.ws.rs.NotFoundException;
 
 /**
@@ -24,7 +23,7 @@ public class TermoDAO extends DAO {
 
     
     public static TermoDAO getInstance() {
-        if (instance == null) {
+        if (instance == null || !(instance instanceof TermoDAO)) {
             instance = new TermoDAO();
         }
 
@@ -80,6 +79,5 @@ public class TermoDAO extends DAO {
 
     public void apagar(TermoGarantia termo) {
         this.getEntityManager().remove(termo);
-        throw new RuntimeException("Chegou no apagar");
     }
 }

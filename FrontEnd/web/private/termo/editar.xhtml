@@ -15,6 +15,10 @@
                 <h:form id="frmProduto">
                     <h:inputHidden id="txtId" value="#{termoMB.termo.id}"/>
                     <p>
+                        <p:outputLabel for="txtTitulo" value="Título (Identificador)"/>
+                        <p:inputText id="txtTitulo" value="#{termoMB.termo.titulo}" class="form-control"/>
+                    </p>
+                    <p>
                         <p:outputLabel for="txtPeriodo" value="Período (em meses)"/>
                         <p:inputText id="txtPeriodo" value="#{termoMB.termo.periodo}" class="form-control"/>
                     </p>
