@@ -36,4 +36,9 @@ public class TermoBean implements TermoRemote {
             return false;
         }
     }
+
+    @Override
+    public TermoGarantia getById(int id) {
+        return TermoDAO.getInstance().getById(id);
+    }
 }

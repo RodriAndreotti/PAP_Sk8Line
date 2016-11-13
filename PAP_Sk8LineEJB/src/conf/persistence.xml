@@ -21,7 +21,10 @@
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.id.new_generator_mappings" value="false" />
+      <property name="hibernate.id.new_generator_mappings" value="false"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="use_sql_comments" value="true"/>
+      <property name="hibernate.default_schema" value="dbo"/>
     </properties>
   </persistence-unit>
 </persistence>

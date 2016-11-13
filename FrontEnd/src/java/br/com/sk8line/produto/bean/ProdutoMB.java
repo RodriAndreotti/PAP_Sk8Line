@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.sk8line.usuario.produto;
+package br.com.sk8line.produto.bean;
 
 import br.com.sk8line.produto.ejb.ProdutoRemote;
 import br.com.sk8line.produto.model.Produto;

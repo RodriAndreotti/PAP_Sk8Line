@@ -7,17 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "termo_garantia")
-@SequenceGenerator(name = "SEQGARANTIA", allocationSize = 1)
 public class TermoGarantia implements Serializable{
 
     @Id
     @Column(name = "id_termo_garantia")
-    @GeneratedValue(generator = "SEQGARANTIA", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String titulo;

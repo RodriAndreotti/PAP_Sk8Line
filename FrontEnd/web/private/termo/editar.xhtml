@@ -4,6 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
       >
 
     <h:body>
@@ -24,7 +25,7 @@
                     </p>
                     <p>
                         <p:outputLabel for="txtTermos" value="Termos da Garantia"/>
-                        <p:inputTextarea id="txtTermos" value="#{termoMB.termo.termos}" class="form-control"/>
+                        <pe:ckEditor id="txtTermos" value="#{termoMB.termo.termos}" class="form-control"/>
                     </p>
                     <p:commandButton value="Salvar" action="#{termoMB.salvar()}" ajax="false"/>
                 </h:form>

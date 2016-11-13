@@ -6,7 +6,6 @@
 package br.com.sk8line.garantia.ejb;
 
 import br.com.sk8line.garantia.model.TermoGarantia;
-import br.com.sk8line.produto.model.Produto;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -19,4 +18,5 @@ public interface TermoRemote {
     public TermoGarantia salvar(TermoGarantia termo);
     public List<TermoGarantia> listar();
     public boolean apagar(TermoGarantia termo);
+    public TermoGarantia getById(int id);
 }
