@@ -16,12 +16,12 @@
                             <p:menuitem  value="Novo" ajax="false"/>
                         </p:submenu>
                         <p:submenu label="Clientes">
-                            <p:menuitem  value="Listar" ajax="false"/>
-                            <p:menuitem  value="Novo" ajax="false" url="/faces/private/editCliente.xhtml"/>
+                            <p:menuitem  value="Listar" ajax="false" url="/faces/private/cliente/listar.xhtml"/>
+                            <p:menuitem  value="Novo" ajax="false" url="/faces/private/cliente/editar.xhtml"/>
                         </p:submenu>
                         <p:submenu label="Colaboradores">
-                            <p:menuitem  value="Listar" ajax="false"/>
-                            <p:menuitem  value="Novo" ajax="false"/>
+                            <p:menuitem  value="Listar" ajax="false" url="/faces/private/colaborador/listar.xhtml"/>
+                            <p:menuitem  value="Novo" ajax="false" url="/faces/private/colaborador/editar.xhtml"/>
                         </p:submenu>
                     </p:submenu>
                     <p:submenu label="Produtos">
@@ -36,8 +36,8 @@
                         <p:menuitem value="Acionar Garantia" ajax="false"/>
                     </p:submenu>
                     <p:submenu label="Vendas">
-                        <p:menuitem value="Listar" ajax="false"/>
-                        <p:menuitem value="Nova Venda" ajax="false"/>
+                        <p:menuitem value="Listar" ajax="false" url="/faces/private/venda/listar.xhtml"/>
+                        <p:menuitem value="Nova Venda" ajax="false" url="/faces/private/venda/editar.xhtml"/>
                     </p:submenu>
                     <p:submenu label="Relatórios">
                         <p:menuitem value="Vendas" ajax="false"/>

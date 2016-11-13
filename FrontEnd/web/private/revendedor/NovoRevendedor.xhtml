@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="/private/template/template.xhtml">
+            <ui:define name="content">
+                <h:form id="form">
+                    <p:panel header="Cadastro de Revendedor">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Razão Social:" for="Razão Social" />
+                            <p:inputText id="txtRazaoSocial" label="Razão Social" value="#{revendedorMB.revendedor.razaoSocial}" maxlength="50" size="40" />
+                            <h:outputLabel value="CNPJ:" for="cnpj" />
+                            <p:inputText id="txtcnpj" label="cnpj" value="#{revendedorMB.revendedor.cnpj}" maxlength="14" size="20"  />
+                            <h:outputLabel value="Nome Fantasia" for="Nome Fantasia" />
+                            <p:inputText id="txtNomeFantasia" label="Nome Fantasia" value="" maxlength="50" size="40" />
+                            <h:outputLabel value="Telefone:" for="telefone" />
+                            <p:inputText id="txtTelefone" label="telefone" value="#{revendedorMB.revendedor.telefone}" maxlength="12" size="20"  />
+                            <h:outputLabel value="Endereço:" for="endereco" />
+                            <p:inputText id="txtEndereco" label="Endereco" value="" maxlength="150" size="40"  />
+                            <h:outputLabel value="Número:" for="Numero" />
+                            <p:inputText id="txtNumero" label="Número:" value="" maxlength="4" size="2"  />
+                            <h:column>
+                                <p:commandButton  value="SALVAR" title="Salvar"/>
+                                <p:commandButton  value="EDITAR" title="Editar"/>
+                                <p:commandButton value="EXCLUIR" title="Excluir"/>
+                            </h:column>
+                        </h:panelGrid>     
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
