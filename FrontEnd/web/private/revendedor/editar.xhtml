@@ -4,12 +4,32 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-    <h:head>
+      <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-       <ui:composition template="/private/template/template.xhtml">
+        <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
+                <script type="text/javascript">
+                    function  verificarCampos() {
+                        if (document.getElementById("txtRazaoSocial").value === null) {
+                            alert("Razão social não pode estar vazio!");
+                            return false;
+                        }
+                        if (document.getElementById("txtcnpj").value === null) {
+                            alert("CNPJ não pode estar vazio!");
+                            return false;
+                        }
+                        if (document.getElementById("txtTelefone").value === null) {
+                            alert("Telefone não pode estar vazio!");
+                            return false;
+                        }
+                        if (document.getElementById("txtEndereco").value === null) {
+                            alert("Endereço não pode estar vazio!");
+                            return false;
+                        }
+                    }
+                </script>
                 <h:form id="form">
                     <p:panel header="Cadastro de Revendedor">
                         <h:panelGrid columns="2">
@@ -17,18 +37,12 @@
                             <p:inputText id="txtRazaoSocial" label="Razão Social" value="#{revendedorMB.revendedor.razaoSocial}" maxlength="50" size="40" />
                             <h:outputLabel value="CNPJ:" for="cnpj" />
                             <p:inputText id="txtcnpj" label="cnpj" value="#{revendedorMB.revendedor.cnpj}" maxlength="14" size="20"  />
-                            <h:outputLabel value="Nome Fantasia" for="Nome Fantasia" />
-                            <p:inputText id="txtNomeFantasia" label="Nome Fantasia" value="" maxlength="50" size="40" />
                             <h:outputLabel value="Telefone:" for="telefone" />
                             <p:inputText id="txtTelefone" label="telefone" value="#{revendedorMB.revendedor.telefone}" maxlength="12" size="20"  />
                             <h:outputLabel value="Endereço:" for="endereco" />
                             <p:inputText id="txtEndereco" label="Endereco" value="#{revendedorMB.revendedor.enderecos}" maxlength="150" size="40"  />
-                            <h:outputLabel value="Número:" for="Numero" />
-                            <p:inputText id="txtNumero" label="Número:" value="" maxlength="4" size="2"  />
                             <h:column>
-                                <p:commandButton  value="SALVAR" title="Salvar" action="#{revendedorMB.salvar()}"/>
-                                <p:commandButton  value="EDITAR" title="Editar"/>
-                                <p:commandButton value="EXCLUIR" title="Excluir"/>
+                                <p:commandButton  value="SALVAR" title="Salvar" action="#{revendedorMB.salvar()}"  ajax="false"/>
                             </h:column>
                         </h:panelGrid>     
                     </p:panel>

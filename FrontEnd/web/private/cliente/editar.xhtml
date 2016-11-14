@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
@@ -10,14 +10,15 @@
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
-                 <h:form id="form">
+                <h:form id="form">
                     <p:panel header="Cadastro de Revendedor">
                         <h:panelGrid columns="2">
                             <h3>Clientes</h3>
-                            
+                            <p:outputLabel for="txtTitulo" value="Título (Identificador)"/>
+                            <p:inputText id="txtTitulo" value="#{termoMB.termo.titulo}" class="form-control"/>
                         </h:panelGrid>
                     </p:panel>
-                 </h:form>
+                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

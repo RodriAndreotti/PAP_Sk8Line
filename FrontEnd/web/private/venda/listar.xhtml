@@ -2,20 +2,47 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
-                
-                <h3>Vendas</h3>
-    <h:head>
-        <title>Lista de Vendas</title>
-    </h:head>
-    <h:body>
-        
-    </h:body>
+
+                <h3>Termos de Garantia</h3>
+                <p:dataTable var="vendas" value="#{vendaMB.vendas}" class="table table-responsive table-hover">
+                    <p:column headerText="Vendedor">
+                        <h:outputText value="#{vendas.vendedor}"/>
+                    </p:column>
+                    <p:column headerText="Cliente">
+                        <h:outputText value="#{vendas.valorTotal}"/>
+                    </p:column>
+                    <p:column headerText="Valor Total">
+                        <h:outputText value="#{vendas.valorTotal}"/>
+                    </p:column>
+                    <p:column headerText="Desconto">
+                        <h:outputText value="#{vendas.desconto}"/>
+                    </p:column>
+                    <p:column headerText="Valor Liquido">
+                        <h:outputText value="#{vendas.valorLiquido}"/>
+                    </p:column>
+                    <p:column headerText="Concretizada">
+                        <h:outputText value="#{vendas.concretizada}"/>
+                    </p:column>
+                    <p:column headerText="Desconto">
+                        <h:outputText value="#{vendas.situacao}"/>
+                    </p:column>
+                    <p:column headerText="Data Venda">
+                        <h:outputText value="#{vendas.dataVenda}"/>
+                    </p:column>
+                    <p:column headerText="">
+                        <h:form>
+                            <p:commandButton class="btn btn-info" value="Editar" action="#{vendaMB.editar(venda)}"/>
+                            <p:commandButton class="btn btn-danger" value="Apagar" action="#{vendaMB.apagar(venda)}"/>
+                        </h:form>
+                    </p:column>
+                </p:dataTable>
+            </ui:define>
+        </ui:composition>
 </html>
 

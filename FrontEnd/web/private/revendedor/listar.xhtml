@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="/private/template/template.xhtml">
+            <ui:define name="content">
+
+                <h3>Termos de Garantia</h3>
+                <p:dataTable var="revendedor" value="#{revendedorMB.revendedores}" class="table table-responsive table-hover">
+                    <p:column headerText="Razão Social">
+                        <h:outputText value="#{revendedor.razaoSocial}"/>
+                    </p:column>
+                    <p:column headerText="CNPJ">
+                        <h:outputText value="#{revendedor.cnpj}"/>
+                    </p:column>
+                    <p:column headerText="Telefone">
+                        <h:outputText value="#{revendedor.telefone}"/>
+                    </p:column>
+                    <p:column headerText="Endereço">
+                        <h:outputText value="#{revendedor.enderecos}"/>
+                    </p:column>
+                    <p:column headerText="">
+                        <h:form>
+                            <p:commandButton class="btn btn-info" value="Editar" action="#{revendedoMB.editar(revendedor)}"/>
+                            <p:commandButton class="btn btn-danger" value="Apagar" action="#{revendedorMB.apagar(revendedor)}"/>
+                        </h:form>
+                    </p:column>
+                </p:dataTable>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>
