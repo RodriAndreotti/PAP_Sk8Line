@@ -4,8 +4,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-          
+      xmlns:pe="http://primefaces.org/ui/extensions"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head/>
 
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
@@ -38,14 +39,17 @@
                     <p>
                         <p:outputLabel for="lstTermoGarantia" value="Termo de Garantia"/>
                         <p:selectOneMenu id="lstTermoGarantia" value="#{produtoMB.produto.termoGarantia}" class="form-control">
-                           
+                            <f:selectItem itemValue="#{null}" itemLabel="Selecione..."/>
+                            <f:selectItems value="#{termoMB.termos}" var="termo" itemLabel="#{termo.titulo}" itemValue="#{termo}"/>
+                            <f:converter binding="#{termoConverter}"/>
                         </p:selectOneMenu>
                     </p>
                     <p>
                         <p:outputLabel for="txtDescricao" value="Descrição"/><br/>
-                        <p:inputTextarea id="txtDescricao" value="#{produtoMB.produto.descricao}" class="form-control"/>
+                        <pe:ckEditor id="txtDescricao" value="#{produtoMB.produto.descricao}" class="form-control">
+                        </pe:ckEditor>
                     </p>
-                    
+
                     <p:commandButton value="Salvar" action="#{produtoMB.salvar()}" ajax="false"/>
                 </h:form>
 

@@ -4,8 +4,10 @@ package br.com.sk8line.produto.model;
 
 import br.com.sk8line.garantia.model.TermoGarantia;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,13 +19,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "produto")
-@SequenceGenerator(name = "ProdutoSEQ", allocationSize = 1)
 public class Produto implements Serializable {
     
     
     @Id
     @Column(name="id_produto")
-    @GeneratedValue(generator = "ProdutoSEQ", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nome;
@@ -31,9 +32,9 @@ public class Produto implements Serializable {
     private String descricao;
 
 
-    @JoinTable(name = "termo_garantia")
-    @JoinColumn(name="termo_garantia", nullable = false)
+    
     @OneToOne
+    @JoinColumn(name = "termo_garantia")
     private TermoGarantia termoGarantia;
 
     private double largura;
