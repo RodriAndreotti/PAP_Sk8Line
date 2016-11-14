@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head/>
+
+    <h:body>
+        <ui:composition template="/private/template/template.xhtml">
+            <ui:define name="content">
+
+                <h3>Produtos - Inserir Estoque</h3>
+
+                <h:form id="frmProduto">
+                    <p>
+                        <p:outputLabel for="txtQuantidade" value="Quantidade"/>
+                        <p:inputText id="txtQuantidade" value="#{estoqueMB.qtd}" class="form-control"/>
+                    </p>
+
+
+                    <p:commandButton value="Inserir" action="#{estoqueMB.inserirEstoque()}" ajax="false"/>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

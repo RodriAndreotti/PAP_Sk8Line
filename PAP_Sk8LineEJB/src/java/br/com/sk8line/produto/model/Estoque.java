@@ -1,35 +1,69 @@
 package br.com.sk8line.produto.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@SequenceGenerator(name = "EstoqueSEQ", allocationSize = 1)
-public class Estoque {
+public class Estoque implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "EstoqueSEQ", strategy = GenerationType.IDENTITY)
+    @Column(name = "id_estoque")
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JoinColumn(referencedColumnName = "id", name = "produto")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "produto")
     private Produto produto;
 
     private int quantidade;
 
-    private Calendar ultimaAtualizacao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date ultimaAtualizacao = new Date();
 
-    public boolean inserirEstoque(Produto produto) {
-        return false;
+    public int getId() {
+        return id;
     }
 
-    public void retirarDoEstoque(Produto produto, int quantidade) {
-
+    public void setId(int id) {
+        this.id = id;
     }
 
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Date getUltimaAtualizacao() {
+        return ultimaAtualizacao;
+    }
+
+    public void setUltimaAtualizacao(Date ultimaAtualizacao) {
+        this.ultimaAtualizacao = ultimaAtualizacao;
+    }
 }

@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
 
-public abstract class Pessoa implements Cadastro {
+public abstract class Pessoa {
 
     private int id;
 
@@ -26,40 +26,7 @@ public abstract class Pessoa implements Cadastro {
     
     private Usuario usuario;
 
-    /**
-     * @see model.Cadastro#addEndereco(model.Endereco)
-     */
-    public void addEndereco(Endereco endereco) {
-
-    }
-
-    /**
-     * @see model.Cadastro#delEndereco(model.Endereco)
-     */
-    public void delEndereco(Endereco endereco) {
-
-    }
-
-    /**
-     * @see model.Cadastro#cadastrar()
-     */
-    public void cadastrar() {
-
-    }
-
-    /**
-     * @see model.Cadastro#editar()
-     */
-    public void editar() {
-
-    }
-
-    /**
-     * @see model.Cadastro#apagar()
-     */
-    public void apagar() {
-
-    }
+    
 
     @Id
     public int getId() {

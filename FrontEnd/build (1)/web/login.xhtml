@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Sk8line</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="bootstrap-theme.min.css"/>
+    </h:head>
+    <h:body>
+        <div class="row">
+            <div class="col-md-5 hidden-sm">&nbsp;</div>
+            <div class="col-md-2 col-sm-12">
+                <h3>Login</h3>
+                <h:form id="frmLogin">
+                    <center>
+                        <p:graphicImage library="images" name="Logo.png" width="200"/>
+                    </center>
+                    <p:growl autoUpdate="true" id="messages" />
+                    <p>
+                        <p:outputLabel value="E-mail"/> &nbsp;
+                        <p:inputText id="txtEmail" value="#{authMB.email}"/>
+                    </p>
+                    <p>
+                        <p:outputLabel value="Senha"/> &nbsp;
+                        <p:password id="txtSenha" value="#{authMB.senha}"/>
+                    </p>
+                    <p:commandButton value="Entrar" action="#{authMB.doLogin()}" ajax="false"/>
+                </h:form>
+            </div>
+            <div class="col-md-5 hidden-sm">&nbsp;</div>
+        </div>
+    </h:body>
+</html>
+

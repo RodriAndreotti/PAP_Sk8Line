@@ -8,6 +8,7 @@ package br.com.sk8line.usuario.dao;
 import br.com.sk8line.common.dao.DAO;
 import br.com.sk8line.usuario.model.Usuario;
 import br.com.sk8line.usuario.service.Password;
+import java.util.Date;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -55,6 +56,11 @@ public class UsuarioDAO extends DAO {
                 );
 
                 usuario = typedQuery.getSingleResult();
+                
+                if(usuario != null) {
+                    usuario.setDtUltimoAcesso(new Date());
+                    this.getEntityManager().merge(usuario);
+                }
             } catch (NoResultException ex) {
                 usuario = null;
             }

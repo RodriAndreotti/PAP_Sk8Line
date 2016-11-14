@@ -2,6 +2,7 @@ package br.com.sk8line.usuario.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -39,8 +40,8 @@ public class Usuario implements Serializable {
 
     private Boolean ativo;
 
-    @Temporal(TemporalType.DATE)
-    private Calendar dtUltimoAcesso;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dtUltimoAcesso;
 
     public boolean validateLogin() {
         return false;
@@ -98,11 +99,11 @@ public class Usuario implements Serializable {
         this.ativo = ativo;
     }
 
-    public Calendar getDtUltimoAcesso() {
+    public Date getDtUltimoAcesso() {
         return dtUltimoAcesso;
     }
 
-    public void setDtUltimoAcesso(Calendar dtUltimoAcesso) {
+    public void setDtUltimoAcesso(Date dtUltimoAcesso) {
         this.dtUltimoAcesso = dtUltimoAcesso;
     }
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="/private/template/template.xhtml">
+            <ui:define name="content">
+
+                <h3>Produtos - Confirmar Exclusão</h3>
+                <p>
+                    <strong>Atenção:</strong><br/>Deseja realmente apagar o produto <h:outputText value="#{produtoMB.produto.nome}"/>?<br/>
+                    Esta ação não poderá ser desfeita!</p>
+                <h:form>
+                    <p:commandButton class="btn btn-danger" value="Sim" action="#{produtoMB.apagar(true)}"/>
+                    <p:commandButton class="btn btn-primary" value="Não" action="#{produtoMB.apagar(false)}"/>
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

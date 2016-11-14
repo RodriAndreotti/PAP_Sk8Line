@@ -6,6 +6,7 @@
 package br.com.sk8line.produto.ejb;
 
 import br.com.sk8line.produto.dao.ProdutoDAO;
+import br.com.sk8line.produto.model.Estoque;
 import br.com.sk8line.produto.model.Produto;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class ProdutoBean implements ProdutoRemote {
 
     @Override
     public Produto salvar(Produto produto) {
+        produto.setEstoque(new Estoque());
         return ProdutoDAO.getInstance().salvar(produto);
     }
 

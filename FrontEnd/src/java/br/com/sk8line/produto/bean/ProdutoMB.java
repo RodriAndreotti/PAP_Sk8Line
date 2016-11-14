@@ -24,13 +24,12 @@ import javax.faces.context.FacesContext;
 @Named(value = "produtoMB")
 @RequestScoped
 public class ProdutoMB {
-    
+
     @EJB
     private ProdutoRemote ejb;
     private List<Produto> produtos = new ArrayList();
     private Produto produto = new Produto();
-    
-    
+
     @PostConstruct
     public void init() {
         this.produtos = ejb.listar();
@@ -51,13 +50,13 @@ public class ProdutoMB {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-    
+
     public String editar(Produto produto) {
         this.produto = produto;
         return "/private/produto/editar.xhtml";
     }
-    
-    public String salvar(){
+
+    public String salvar() {
         this.ejb.salvar(this.produto);
         this.produto = new Produto();
         this.produtos = ejb.listar();
@@ -65,12 +64,24 @@ public class ProdutoMB {
         FacesContext.getCurrentInstance().addMessage(null, fm);
         return "/private/produto/listar.xhtml";
     }
-    
-    public String apagar(Produto produto){
-        this.ejb.apagar(produto);
-        this.produtos = ejb.listar();
-        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto excluído com sucesso!", "Produto excluído com sucesso!");
-        FacesContext.getCurrentInstance().addMessage(null, fm);
+
+    public String confirm(Produto produto) {
+        this.produto = produto;
+
+        return "/private/produto/confirm.xhtml";
+    }
+
+    public String apagar(boolean confirm) {
+        if (confirm) {
+            
+            this.ejb.apagar(this.produto);
+            this.produtos = ejb.listar();
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto excluído com sucesso!", "Produto excluído com sucesso!");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+        } 
+        
+        this.produto = new Produto();
+        
         return "/private/produto/listar.xhtml";
     }
 }

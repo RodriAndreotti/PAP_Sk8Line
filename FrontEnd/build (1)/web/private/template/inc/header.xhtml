@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition>
+
+            <p:growl autoUpdate="true" id="messages" />
+            <div class="header">
+                <p:graphicImage library="images" name="Logo.png" height="100"/>
+                <small class="pull-right">Logado como <strong><h:outputText value="#{usuario.email}"/></strong>. Seja bem Vindo</small>
+            </div>
+            <nav id="menu">
+                <ui:include src="/private/template/inc/menu.xhtml"/>
+            </nav>
+        </ui:composition>
+    </h:body>
+</html>

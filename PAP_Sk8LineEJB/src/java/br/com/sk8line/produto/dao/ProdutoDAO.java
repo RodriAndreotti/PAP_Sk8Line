@@ -93,6 +93,10 @@ public class ProdutoDAO extends DAO {
     
     
     public void apagar(Produto produto) {
+        produto = this.getEntityManager().find(Produto.class, produto.getId());
+        
+        this.getEntityManager().getTransaction().begin();
         this.getEntityManager().remove(produto);
+        this.getEntityManager().getTransaction().commit();
     }
 }

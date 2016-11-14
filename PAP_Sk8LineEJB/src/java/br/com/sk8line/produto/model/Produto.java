@@ -45,7 +45,8 @@ public class Produto implements Serializable {
 
     private double valor;
 
-
+    @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL)
+    private Estoque estoque;
 
     public int getId() {
         return id;
@@ -109,6 +110,15 @@ public class Produto implements Serializable {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public Estoque getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Estoque estoque) {
+        estoque.setProduto(this);
+        this.estoque = estoque;
     }
     
     
