@@ -1,4 +1,3 @@
-
 package br.com.sk8line.venda.model;
 
 import br.com.sk8line.common.model.Endereco;
@@ -53,8 +52,7 @@ public class Venda {
     @JoinColumn(name = "id")
     private Endereco enderecoEntrega;
 
-    
-    @OneToMany(cascade=ALL, mappedBy = "venda")
+    @OneToMany(cascade = ALL, mappedBy = "venda")
     @ElementCollection(targetClass = VendaItem.class)
     private List<VendaItem> produtos;
 
@@ -157,7 +155,5 @@ public class Venda {
     public void setProdutos(List<VendaItem> produtos) {
         this.produtos = produtos;
     }
-    
-    
 
 }
