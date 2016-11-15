@@ -8,17 +8,21 @@ package br.com.sk8line.produto.ejb;
 import br.com.sk8line.produto.dao.ProdutoDAO;
 import br.com.sk8line.produto.model.Estoque;
 import br.com.sk8line.produto.model.Produto;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 
 /**
- *
+ * Integra as requisições vindas do cliente ao DAO
  * @author Rodrigo
  */
 @Stateless
 public class ProdutoBean implements ProdutoRemote {
 
+    /**
+     * Salvar
+     * @param produto
+     * @return 
+     */
     @Override
     public Produto salvar(Produto produto) {
         if (produto.getEstoque() == null) {
@@ -27,11 +31,20 @@ public class ProdutoBean implements ProdutoRemote {
         return ProdutoDAO.getInstance().salvar(produto);
     }
 
+    /**
+     * Listar
+     * @return 
+     */
     @Override
     public List<Produto> listar() {
         return ProdutoDAO.getInstance().listar();
     }
 
+    /**
+     * Apagar
+     * @param produto
+     * @return 
+     */
     @Override
     public boolean apagar(Produto produto) {
         try {
@@ -40,6 +53,16 @@ public class ProdutoBean implements ProdutoRemote {
         } catch (Exception ex) {
             return false;
         }
+    }
+    
+    /**
+     * Obter produto por ID
+     * @param id
+     * @return
+     */
+    @Override
+    public Produto getById(int id){
+        return ProdutoDAO.getInstance().getById(id);
     }
 
 }

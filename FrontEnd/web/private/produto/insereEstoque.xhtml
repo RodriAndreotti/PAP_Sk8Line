@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head/>
 
     <h:body>
@@ -13,6 +14,9 @@
                 <h3>Produtos - Inserir Estoque</h3>
 
                 <h:form id="frmProduto">
+                    <h:inputHidden id="hidEstoque" value="#{estoqueMB.estoque}">
+                        <f:converter binding="#{estoqueConverter}"/>
+                    </h:inputHidden>
                     <p>
                         <p:outputLabel for="txtQuantidade" value="Quantidade"/>
                         <p:inputText id="txtQuantidade" value="#{estoqueMB.qtd}" class="form-control"/>

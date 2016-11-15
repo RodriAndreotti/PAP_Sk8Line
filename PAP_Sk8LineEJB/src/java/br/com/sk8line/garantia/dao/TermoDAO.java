@@ -43,7 +43,7 @@ public class TermoDAO extends DAO {
         } else {
             if (!this.getEntityManager().contains(termo)) {
                 if (this.getEntityManager().find(TermoGarantia.class, termo.getId()) == null) {
-                    throw new NotFoundException("Produto não encontrado");
+                    throw new NotFoundException("Termo não encontrado");
                 }
             }
 
@@ -77,7 +77,8 @@ public class TermoDAO extends DAO {
         return termo;
     }
 
-    public void apagar(TermoGarantia termo) {
+    public void apagar(TermoGarantia t) {
+        TermoGarantia termo = this.getEntityManager().contains(t) ? t : this.getEntityManager().getReference(TermoGarantia.class,t.getId());
         this.getEntityManager().remove(termo);
     }
 }

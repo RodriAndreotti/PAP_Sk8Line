@@ -20,11 +20,14 @@ public abstract class DAO {
 
     protected EntityManager getEntityManager() {
 
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PAPSk8LineEJBPU");
+        if(this.em == null) {
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("PAPSk8LineEJBPU");
+        
 
-        EntityManager em = factory.createEntityManager();
-//        factory.close();
-        this.em = em;
+            EntityManager em = factory.createEntityManager();
+            factory.close();
+            this.em = em;
+        }
 
         return this.em;
     }

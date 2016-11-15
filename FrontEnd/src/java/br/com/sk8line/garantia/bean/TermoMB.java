@@ -5,7 +5,6 @@
  */
 package br.com.sk8line.garantia.bean;
 
-
 import br.com.sk8line.garantia.ejb.TermoRemote;
 import br.com.sk8line.garantia.model.TermoGarantia;
 import java.util.ArrayList;
@@ -55,9 +54,8 @@ public class TermoMB {
         this.termo = termo;
         return "/private/termo/editar.xhtml";
     }
-    
-    
-    public String salvar(){
+
+    public String salvar() {
         this.ejb.salvar(this.termo);
         this.termo = new TermoGarantia();
         this.termos = ejb.listar();
@@ -65,13 +63,27 @@ public class TermoMB {
         FacesContext.getCurrentInstance().addMessage(null, fm);
         return "/private/termo/listar.xhtml";
     }
-    
-    
-    public String apagar(TermoGarantia termo){
-        this.ejb.apagar(termo);
-        this.termos = ejb.listar();
-        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Termo excluído com sucesso!", "Termo excluído com sucesso!");
-        FacesContext.getCurrentInstance().addMessage(null, fm);
+
+    public String confirm(TermoGarantia termo) {
+        this.termo = termo;
+
+        return "/private/termo/confirm.xhtml";
+    }
+
+    public String apagar(boolean confirm) {
+
+        if (confirm) {
+            FacesMessage fm;
+
+            if (this.ejb.apagar(termo)) {
+                this.termos = ejb.listar();
+                fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Termo excluído com sucesso!", "Termo excluído com sucesso!");
+            } else {
+                fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao excluir termo!", "Erro ao excluir termo!");
+            }
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+        }
+        this.termo = new TermoGarantia();
         return "/private/termo/listar.xhtml";
     }
 }

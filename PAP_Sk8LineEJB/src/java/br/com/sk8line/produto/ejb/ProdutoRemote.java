@@ -18,4 +18,5 @@ public interface ProdutoRemote {
     public Produto salvar(Produto produto);
     public List<Produto> listar();
     public boolean apagar(Produto produto);
+    public Produto getById(int id);
 }

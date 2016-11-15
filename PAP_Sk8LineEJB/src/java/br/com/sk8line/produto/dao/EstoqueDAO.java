@@ -29,6 +29,11 @@ public class EstoqueDAO extends DAO {
         return instance;
     }
 
+    /**
+     * Atualiza o estoque
+     * @param e
+     * @return 
+     */
     public boolean atualizar(Estoque e) {
         try {
             if (!this.getEntityManager().contains(e)) {
@@ -41,5 +46,19 @@ public class EstoqueDAO extends DAO {
         } catch (NotFoundException ex) {
             return false;
         }
+    }
+    
+    /**
+     * Obtém estoque pelo ID
+     * @param id
+     * @return 
+     */
+    public Estoque getById(int id) {
+        Estoque estoque = this.getEntityManager().find(Estoque.class, id);
+        if (estoque == null) {
+            throw new NotFoundException("Estoque não encontrado");
+        }
+        
+        return estoque;
     }
 }

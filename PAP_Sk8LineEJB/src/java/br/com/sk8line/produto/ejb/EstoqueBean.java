@@ -31,4 +31,9 @@ public class EstoqueBean implements EstoqueRemote {
         return EstoqueDAO.getInstance().atualizar(e);
     }
 
+    @Override
+    public Estoque getById(int id) {
+        return EstoqueDAO.getInstance().getById(id);
+    }
+
 }

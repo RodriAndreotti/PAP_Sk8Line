@@ -18,4 +18,5 @@ import javax.ejb.Remote;
 public interface EstoqueRemote {
     public boolean inserirEstoque(Estoque e, int qtd);
     public boolean removerEstoque(Estoque e, int qtd);
+    public Estoque getById(int id);
 }

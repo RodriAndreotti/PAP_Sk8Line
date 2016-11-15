@@ -10,16 +10,16 @@
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
 
-                <h3>Produtos - Confirmar Exclusão</h3>
+                <h3>Termos de Garantia - Confirmar Exclusão</h3>
                 <p>
-                    <strong>Atenção:</strong><br/>Deseja realmente apagar o produto <h:outputText value="#{produtoMB.produto.nome}"/>?<br/>
+                    <strong>Atenção:</strong><br/>Deseja realmente apagar o termo <h:outputText value="#{termoMB.termo.titulo}"/>?<br/>
                     Esta ação não poderá ser desfeita!</p>
                 <h:form>
-                    <h:inputHidden id="hidProduto" value="#{produtoMB.produto}">
-                        <f:converter binding="#{produtoConverter}"/>
+                    <h:inputHidden id="hidTermo" value="#{termoMB.termo}">
+                        <f:converter binding="#{termoConverter}"/>
                     </h:inputHidden>
-                    <p:commandButton class="btn btn-danger" value="Sim" action="#{produtoMB.apagar(true)}"/>
-                    <p:commandButton class="btn btn-primary" value="Não" action="#{produtoMB.apagar(false)}"/>
+                    <p:commandButton class="btn btn-danger" value="Sim" action="#{termoMB.apagar(true)}"/>
+                    <p:commandButton class="btn btn-primary" value="Não" action="#{termoMB.apagar(false)}"/>
 
                 </h:form>
             </ui:define>

@@ -73,15 +73,21 @@ public class ProdutoMB {
 
     public String apagar(boolean confirm) {
         if (confirm) {
-            
-            this.ejb.apagar(this.produto);
-            this.produtos = ejb.listar();
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto excluído com sucesso!", "Produto excluído com sucesso!");
+            FacesMessage fm;
+
+            if (this.ejb.apagar(this.produto)) {
+                this.produtos = ejb.listar();
+                fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto excluído com sucesso!", "Produto excluído com sucesso!");
+            } else {
+                fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao excluir produto!", "Erro ao excluir produto!");
+
+            }
             FacesContext.getCurrentInstance().addMessage(null, fm);
-        } 
+        }
+
         
         this.produto = new Produto();
-        
+
         return "/private/produto/listar.xhtml";
     }
 }
