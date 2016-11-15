@@ -3,20 +3,57 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Cadastro de Cliente</title>
     </h:head>
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
-                <h:form id="form">
-                    <p:panel header="Cadastro de Revendedor">
-                        <h:panelGrid columns="2">
-                            <h3>Clientes</h3>
-                            <p:outputLabel for="txtTitulo" value="Título (Identificador)"/>
-                            <p:inputText id="txtTitulo" value="#{termoMB.termo.titulo}" class="form-control"/>
-                        </h:panelGrid>
+                <h:form id="frmCadastro">
+                    <p:panel id="PainelCadastro" header="Cadastro de Cliente">
+
+                        <p:panelGrid id="PainelCadastro" columns="2" styleClass="semBorda">
+                            <p:outputLabel id="lblNome" value="Nome:" />
+                            <p:inputText id="txtNome" value="" maxlength="50" size="40" />
+
+                            <p:outputLabel id="lblCpf" value="CPF:" />
+                            <p:inputMask id="txtCpf" value="" maxlength="16" size="10" mask="999.999.999-99" />
+
+                            <p:outputLabel id="lblLograd" value="Endereço:" />
+                            <p:inputText id="txtLogradouro" value="" maxlength="50" size="40" />
+
+                            <p:outputLabel id="lblNumLograd" value="Número:" />
+                            <p:inputText id="txtNumLograd" value="" maxlength="5" size="5" />
+
+                            <p:outputLabel id="lblBairro" value="Bairro:" />
+                            <p:inputText id="txtBairro" value="" maxlength="30" size="25" />
+
+                            <p:outputLabel id="lblCep" value="CEP:" />
+                            <p:inputMask id="txtCep" value="" maxlength="8" size="8" mask="99.999-999" />
+
+                            <p:outputLabel id="lblCidade" value="Cidade:" />
+                            <p:inputText id="txtCidade" value="" maxlength="40" size="33" />
+
+                            <p:outputLabel id="lblUf" value="UF:" />
+                            <p:selectOneMenu id="cmbUf" value="">
+                                <f:selectItem itemLabel="MG" itemValue="MG" />
+                                <f:selectItem itemLabel="PR" itemValue="PR" />
+                                <f:selectItem itemLabel="SP" itemValue="SP" />
+                                <f:selectItem itemLabel="RS" itemValue="RS" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel id="lblTelFixo" value="Tel.Fixo:" />
+                            <p:inputMask id="txtTelFixo" value=""  maxlength="10" size="10" mask="(99)9999-9999" />
+
+                            <p:outputLabel id="lblTelCelular" value="Tel.Celular:" />
+                            <p:inputMask id="txtTelCelular" value="" maxlength="11" size="10"  mask="(99)9999-9999" />
+
+                            <p:commandButton id="btnSalvar" value="Salvar" image="ui-icon-disk" />
+                            <p:commandButton id="btnCancelar" value="Cancelar" type="reset" image="ui-icon-cancel" />
+
+                        </p:panelGrid>
                     </p:panel>
                 </h:form>
             </ui:define>
