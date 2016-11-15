@@ -21,7 +21,9 @@ public class ProdutoBean implements ProdutoRemote {
 
     @Override
     public Produto salvar(Produto produto) {
-        produto.setEstoque(new Estoque());
+        if (produto.getEstoque() == null) {
+            produto.setEstoque(new Estoque());
+        }
         return ProdutoDAO.getInstance().salvar(produto);
     }
 
