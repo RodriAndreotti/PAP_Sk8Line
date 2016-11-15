@@ -25,7 +25,7 @@ public abstract class DAO {
         
 
             EntityManager em = factory.createEntityManager();
-            factory.close();
+            //factory.close();
             this.em = em;
         }
 

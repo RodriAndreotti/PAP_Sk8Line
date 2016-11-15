@@ -80,5 +80,6 @@ public class TermoDAO extends DAO {
     public void apagar(TermoGarantia t) {
         TermoGarantia termo = this.getEntityManager().contains(t) ? t : this.getEntityManager().getReference(TermoGarantia.class,t.getId());
         this.getEntityManager().remove(termo);
+        
     }
 }
