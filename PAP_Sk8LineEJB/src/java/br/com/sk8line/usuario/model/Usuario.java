@@ -1,40 +1,40 @@
 package br.com.sk8line.usuario.model;
 
+import br.com.sk8line.usuario.dao.UsuarioDAO;
+import br.com.sk8line.usuario.service.Password;
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@SequenceGenerator(name = "UsuarioSEQ", allocationSize = 1)
 public class Usuario implements Serializable {
 
     @Id
     @Column(name = "id_usuario")
-    @GeneratedValue(generator = "UsuarioSEQ", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String email;
 
+    
     private String senha;
 
     private String salt;
 
     @OneToOne
-    //@JoinTable(name="role", joinColumns = {@JoinColumn(name = "role")})
     @JoinColumn(name="role")
     private Role role;
 
@@ -52,7 +52,7 @@ public class Usuario implements Serializable {
     }
 
     public int getId() {
-        return id;
+        return (id == 0 ? null : id);
     }
 
     public void setId(int id) {
@@ -105,6 +105,15 @@ public class Usuario implements Serializable {
 
     public void setDtUltimoAcesso(Date dtUltimoAcesso) {
         this.dtUltimoAcesso = dtUltimoAcesso;
+    }
+    
+    @PrePersist
+    private void criptografa(){
+        UsuarioDAO dao = new UsuarioDAO();
+        String dbSalt = dao.obterSalt(this.getEmail());
+        Password passwd = new Password(dbSalt);
+        this.setSalt(passwd.getSalt());
+        this.setSenha(passwd.encrypt(this.getSenha()));
     }
 
 }

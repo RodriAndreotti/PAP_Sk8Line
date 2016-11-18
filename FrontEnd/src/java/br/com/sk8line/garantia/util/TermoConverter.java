@@ -26,13 +26,20 @@ public class TermoConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        if(value == null) {
+            return null;
+        }
+        
+        if(value.equals("") || value.equals("0")){
+            return value;
+        }
         int id = Integer.parseInt(value);
         return findTermo(id);
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if(!(value instanceof TermoGarantia) || value == null){
+        if(!(value instanceof TermoGarantia)){
             return null;
         }
         

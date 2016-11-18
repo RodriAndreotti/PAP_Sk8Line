@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="/private/template/template.xhtml">
+            <ui:define name="content">
+
+                <p:panel header="Produtos - Confirmar Exclusão">
+                    <p>
+                        <strong>Atenção:</strong><br/>Deseja realmente apagar o colaborador <h:outputText value="#{colaboradorMB.colaborador.nome}"/>?<br/>
+                        Esta ação não poderá ser desfeita!</p>
+                    <h:form>
+                        <h:inputHidden id="hidProduto" value="#{colaboradorMB.colaborador}">
+                            <f:converter binding="#{colaboradorConverter}"/>
+                        </h:inputHidden>
+                        <p:commandButton class="btn btn-danger" value="Sim" action="#{colaboradorMB.apagar(true)}"/>
+                        <p:commandButton class="btn btn-primary" value="Não" action="#{colaboradorMB.apagar(false)}"/>
+
+                    </h:form>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

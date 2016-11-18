@@ -25,6 +25,13 @@ public class ProdutoConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        if(value == null) {
+            return null;
+        }
+        
+        if(value.equals("") || value.equals("0")){
+            return value;
+        }
         int id = Integer.parseInt(value);
         return findProduto(id);
     }

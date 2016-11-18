@@ -29,3 +29,11 @@ nav#menu ul > li {
     content: " ";
     clear: both;
 }
+
+#menu ul li ul li {
+    width: 200px;
+}
+
+.lstEndereco ul {
+    list-style: none !important;
+}

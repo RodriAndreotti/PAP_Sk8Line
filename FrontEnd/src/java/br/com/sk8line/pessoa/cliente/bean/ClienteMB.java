@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.sk8line.pessoa;
+package br.com.sk8line.pessoa.cliente.bean;
 
 import br.com.sk8line.pessoa.ejb.ClienteRemote;
-import br.com.sk8line.pessoa.model.ClientePessoaFisica;
-import br.com.sk8line.pessoa.model.ClientePessoaJuridica;
+import br.com.sk8line.pessoa.cliente.model.ClientePessoaFisica;
+import br.com.sk8line.pessoa.cliente.model.ClientePessoaJuridica;
 import br.com.sk8line.pessoa.model.Pessoa;
 import br.com.sk8line.pessoa.model.PessoaFisica;
 import br.com.sk8line.pessoa.model.PessoaJuridica;
@@ -43,7 +43,7 @@ public class ClienteMB {
         return pessoas;
     }
 
-    public void setTermos(List<Pessoa> pessoa) {
+    public void setPessoas(List<Pessoa> pessoa) {
         this.pessoas = pessoa;
     }
 

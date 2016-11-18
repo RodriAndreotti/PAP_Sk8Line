@@ -6,19 +6,17 @@
 package br.com.sk8line.usuario.service;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.UnsupportedCharsetException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
-public class Password {
+public class Password  {
     
     private String salt;
     private String method;

@@ -11,25 +11,25 @@
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
 
-                <h3>Termos de Garantia</h3>
+                <p:panel header="Termos de Garantia">
 
-                <h:form id="frmProduto">
-                    <h:inputHidden id="txtId" value="#{termoMB.termo.id}"/>
-                    <p>
-                        <p:outputLabel for="txtTitulo" value="Título (Identificador)"/>
-                        <p:inputText id="txtTitulo" value="#{termoMB.termo.titulo}" class="form-control"/>
-                    </p>
-                    <p>
-                        <p:outputLabel for="txtPeriodo" value="Período (em meses)"/>
-                        <p:inputText id="txtPeriodo" value="#{termoMB.termo.periodo}" class="form-control"/>
-                    </p>
-                    <p>
-                        <p:outputLabel for="txtTermos" value="Termos da Garantia"/>
-                        <pe:ckEditor id="txtTermos" value="#{termoMB.termo.termos}" class="form-control"/>
-                    </p>
-                    <p:commandButton value="Salvar" action="#{termoMB.salvar()}" ajax="false"/>
-                </h:form>
-
+                    <h:form id="frmProduto">
+                        <h:inputHidden id="txtId" value="#{termoMB.termo.id}"/>
+                        <p>
+                            <p:outputLabel for="txtTitulo" value="Título (Identificador)"/>
+                            <p:inputText id="txtTitulo" value="#{termoMB.termo.titulo}" class="form-control"/>
+                        </p>
+                        <p>
+                            <p:outputLabel for="txtPeriodo" value="Período (em meses)"/>
+                            <p:inputText id="txtPeriodo" value="#{termoMB.termo.periodo}" class="form-control"/>
+                        </p>
+                        <p>
+                            <p:outputLabel for="txtTermos" value="Termos da Garantia"/>
+                            <pe:ckEditor id="txtTermos" value="#{termoMB.termo.termos}" class="form-control"/>
+                        </p>
+                        <p:commandButton value="Salvar" action="#{termoMB.salvar()}" ajax="false"/>
+                    </h:form>
+                </p:panel>
             </ui:define>
         </ui:composition>
     </h:body>

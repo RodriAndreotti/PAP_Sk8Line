@@ -8,33 +8,46 @@ package br.com.sk8line.pessoa.revendedor.model;
 
 import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 
 /**
  * 
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
-@Embeddable
-class RevEndPK implements Serializable{
-    @Column
-    private int revendedor;
-    
-    @Column
+public class RevendedorEnderecoPK implements Serializable{
     private int endereco;
+    private int revendedor;
+    private int numero;
 
-    public RevEndPK() {
+    public int getEndereco() {
+        return endereco;
     }
 
-    public RevEndPK(int revendedor, int endereco) {
-        this.revendedor = revendedor;
+    public void setEndereco(int endereco) {
         this.endereco = endereco;
+    }
+
+    public int getRevendedor() {
+        return revendedor;
+    }
+
+    public void setRevendedor(int revendedor) {
+        this.revendedor = revendedor;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + this.revendedor;
-        hash = 67 * hash + this.endereco;
+        int hash = 7;
+        hash = 89 * hash + this.endereco;
+        hash = 89 * hash + this.revendedor;
+        hash = 89 * hash + this.numero;
         return hash;
     }
 
@@ -49,31 +62,16 @@ class RevEndPK implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final RevEndPK other = (RevEndPK) obj;
+        final RevendedorEnderecoPK other = (RevendedorEnderecoPK) obj;
+        if (this.endereco != other.endereco) {
+            return false;
+        }
         if (this.revendedor != other.revendedor) {
             return false;
         }
-        if (this.endereco != other.endereco) {
+        if (this.numero != other.numero) {
             return false;
         }
         return true;
     }
-
-    public int getRevendedor() {
-        return revendedor;
-    }
-
-    public void setRevendedor(int revendedor) {
-        this.revendedor = revendedor;
-    }
-
-    public int getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(int endereco) {
-        this.endereco = endereco;
-    }
-    
-    
 }

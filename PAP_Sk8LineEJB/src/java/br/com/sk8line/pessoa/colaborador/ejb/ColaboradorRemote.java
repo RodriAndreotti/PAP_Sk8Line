@@ -5,7 +5,7 @@
  */
 package br.com.sk8line.pessoa.colaborador.ejb;
 
-import br.com.sk8line.pessoa.model.Colaborador;
+import br.com.sk8line.pessoa.colaborador.model.Colaborador;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -21,4 +21,6 @@ public interface ColaboradorRemote {
     public List<Colaborador> listar();
 
     public boolean apagar(Colaborador colaborador);
+    
+    public Colaborador getById(int id);
 }

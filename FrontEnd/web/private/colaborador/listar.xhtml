@@ -9,13 +9,31 @@
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
-                
-                <h3>Colaboradores</h3>
-    <h:head>
-        <title>Lista de Colaboradores</title>
-    </h:head>
-    <h:body>
-        
+                <p:panel header="Colaboradores">
+                    <p:dataTable var="colaborador" value="#{colaboradorMB.colaboradores}" class="table table-responsive table-hover">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{colaborador.nome}"/>
+                        </p:column>
+                        <p:column headerText="CPF">
+                            <h:outputText value="#{colaborador.cpf}"/>
+                        </p:column>
+                        <p:column headerText="Telefone">
+                            <h:outputText value="#{colaborador.telefone}"/>
+                        </p:column>
+                        <p:column headerText="Email (Nome de Usuário">
+                            <h:outputText value="#{colaborador.usuario.email}"/>
+                        </p:column>
+                        
+                        <p:column headerText="">
+                            <h:form>
+                                <p:commandButton class="btn btn-info" value="Editar" action="#{colaboradorMB.editar(colaborador)}"/>
+                                <p:commandButton class="btn btn-danger" value="Apagar" action="#{colaboradorMB.confirm(colaborador)}"/>
+                            </h:form>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

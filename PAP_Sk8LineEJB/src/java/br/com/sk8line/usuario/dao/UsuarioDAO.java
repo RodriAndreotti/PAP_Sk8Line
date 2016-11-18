@@ -56,8 +56,8 @@ public class UsuarioDAO extends DAO {
                 );
 
                 usuario = typedQuery.getSingleResult();
-                
-                if(usuario != null) {
+
+                if (usuario != null) {
                     usuario.setDtUltimoAcesso(new Date());
                     this.getEntityManager().merge(usuario);
                 }
@@ -66,9 +66,6 @@ public class UsuarioDAO extends DAO {
             }
 
             return usuario;
-
-            // SELECT * FROM usuario WHERE email = email AND senha = hash AND ativo = 1
-            /* return new Usuario(); */
         }
 
         return null;
@@ -107,9 +104,9 @@ public class UsuarioDAO extends DAO {
      * @param login
      * @return
      */
-    private String obterSalt(String email) {
+    public String obterSalt(String email) {
 
-        //throw new UnsupportedOperationException("Não suportado ainda."); //To change body of generated methods, choose Tools | Templates.
+        try {
         CriteriaBuilder builder = this.getCriteriaBuilder();
         CriteriaQuery<String> saltQuery = builder.createQuery(String.class);
 
@@ -122,5 +119,16 @@ public class UsuarioDAO extends DAO {
         String salt = typedQuery.getSingleResult();
 
         return salt;
+        }
+        catch(Exception ex) {
+            return null;
+        }
+    }
+
+    public Usuario inserir(Usuario usuario) {
+        this.getEntityManager().persist(usuario);
+        this.getEntityManager().flush();
+
+        return usuario;
     }
 }

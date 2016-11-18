@@ -9,35 +9,36 @@
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
-                
-                <h3>Produtos</h3>
-                <p:dataTable var="produto" value="#{produtoMB.produtos}" class="table table-responsive table-hover">
-                    <p:column headerText="Nome">
-                        <h:outputText value="#{produto.nome}"/>
-                    </p:column>
-                    <p:column headerText="Largura">
-                        <h:outputText value="#{produto.largura}"/>
-                    </p:column>
-                    <p:column headerText="Altura">
-                        <h:outputText value="#{produto.altura}"/>
-                    </p:column>
-                    <p:column headerText="Comprimento">
-                        <h:outputText value="#{produto.comprimento}"/>
-                    </p:column>
-                    <p:column headerText="Estoque">
-                        <h:outputText value="#{produto.estoque.quantidade}"/>
-                    </p:column>
-                    <p:column headerText="Valor">
-                        <h:outputText value="#{produto.valor}"/>
-                    </p:column>
-                    <p:column headerText="">
-                        <h:form>
-                            <p:commandButton class="btn btn-info" value="Editar" action="#{produtoMB.editar(produto)}"/>
-                            <p:commandButton class="btn btn-danger" value="Apagar" action="#{produtoMB.confirm(produto)}"/>
-                            <p:commandButton class="btn btn-default" value="Inserir Estoque" action="#{estoqueMB.lancar(produto)}"/>
-                        </h:form>
-                    </p:column>
-                </p:dataTable>
+
+                <p:panel header="Produtos">
+                    <p:dataTable var="produto" value="#{produtoMB.produtos}" class="table table-responsive table-hover">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{produto.nome}"/>
+                        </p:column>
+                        <p:column headerText="Largura">
+                            <h:outputText value="#{produto.largura}"/>
+                        </p:column>
+                        <p:column headerText="Altura">
+                            <h:outputText value="#{produto.altura}"/>
+                        </p:column>
+                        <p:column headerText="Comprimento">
+                            <h:outputText value="#{produto.comprimento}"/>
+                        </p:column>
+                        <p:column headerText="Estoque">
+                            <h:outputText value="#{produto.estoque.quantidade}"/>
+                        </p:column>
+                        <p:column headerText="Valor">
+                            <h:outputText value="#{produto.valor}"/>
+                        </p:column>
+                        <p:column headerText="">
+                            <h:form>
+                                <p:commandButton class="btn btn-info" value="Editar" action="#{produtoMB.editar(produto)}"/>
+                                <p:commandButton class="btn btn-danger" value="Apagar" action="#{produtoMB.confirm(produto)}"/>
+                                <p:commandButton class="btn btn-default" value="Inserir Estoque" action="#{estoqueMB.lancar(produto)}"/>
+                            </h:form>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
             </ui:define>
         </ui:composition>
 

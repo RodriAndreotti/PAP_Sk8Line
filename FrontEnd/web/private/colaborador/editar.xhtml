@@ -3,20 +3,98 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Cadastro de Colaborador</title>
     </h:head>
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
-                <h:form id="form">
-                    <p:panel header="Cadastro de Revendedor">
-                        <h:panelGrid columns="2">
-                            <h3>Colaborador</h3>
-                            <p:outputLabel for="txtTitulo" value="Título (Identificador)"/>
-                            <p:inputText id="txtTitulo" value="#{termoMB.termo.titulo}" class="form-control"/>
-                        </h:panelGrid>
+                <h:form id="frmColaborador">
+                    <p:panel header="Cadastro de Colaborador">
+                        <p:panelGrid columns="2" >
+                            <p:panel>
+                                <p>
+                                    <p:outputLabel for="txtNome" value="Nome"/>
+                                    <p:inputText id="txtNome" value="#{colaboradorMB.colaborador.nome}" class="form-control" required="true"/>
+                                </p>
+                                <p>
+                                    <p:outputLabel for="txtCargo" value="Cargo"/>
+                                    <p:inputText id="txtCargo" value="#{colaboradorMB.colaborador.cargo}" class="form-control" required="true"/>
+                                </p>
+                                <p>
+                                    <p:outputLabel for="txtTelefone" value="Telefone"/>
+                                    <p:inputMask id="txtTelefone" value="#{colaboradorMB.colaborador.telefone}" class="form-control" mask="(99) 9999-9999?9" required="true"/>
+                                </p>
+                                <p>
+                                    <p:outputLabel for="txtCpf" value="CPF"/>
+                                    <p:inputMask id="txtCpf" value="#{colaboradorMB.colaborador.cpf}" class="form-control" mask="999.999.999-99" required="true"/>
+                                </p>
+
+                            </p:panel>
+                            <p:panel>
+                                <p>
+                                    <p:outputLabel for="txtEmail" value="Usuário"/>
+                                    <p:inputText id="txtEmail" value="#{colaboradorMB.colaborador.usuario.email}" class="form-control" required="true"/>
+                                </p>
+                                <p>
+                                    <p:outputLabel for="txtSenha" value="Senha"/>
+                                    <p:password id="txtSenha" value="#{colaboradorMB.colaborador.usuario.senha}" class="form-control" match="txtConfirmSenha"  required="true"/>
+                                </p>
+                                <p>
+                                    <p:outputLabel for="txtConfirmSenha" value="Confirmar Senha"/>
+                                    <p:password id="txtConfirmSenha" value="#{colaboradorMB.colaborador.usuario.senha}" class="form-control" required="true"/>
+                                </p>
+                                <p>
+                                    <p:outputLabel for="cbPapel" value="Grupo de Acesso"/>
+                                    <p:selectOneMenu id="cbPapel" value="#{colaboradorMB.colaborador.usuario.role}" class="form-control">
+                                        <f:selectItem itemValue="" itemLabel="Selecione..."/>
+                                        <f:selectItems value="#{roleMB.roles}" var="role" itemLabel="#{role.nome}" itemValue="#{role}"/>
+                                        <f:converter binding="#{roleConverter}"/>
+                                    </p:selectOneMenu>
+                                </p>
+                            </p:panel>
+                        </p:panelGrid>
+
+                        <p:panel header="Endereços">
+                            <p:outputPanel id="lstEndereco" class="lstEndereco">
+                                <p:dataList value="#{colaboradorMB.colaborador.enderecos}" var="endereco">
+                                    <h:inputHidden id="hidIdEndereco" value="#{endereco.endereco.id}"/>
+                                    <p>
+                                        <p:outputLabel for="txtCep" id="lblCep" value="CEP:" />
+                                        <p:inputMask id="txtCep" value="#{endereco.endereco.cep}" maxlength="9" size="9" mask="99999-999" required="true">
+                                            <p:ajax event="blur" listener="#{colaboradorMB.buscaCep(endereco.endereco)}" update="hidIdEndereco txtLogradouro txtBairro txtCidade cmbUf" />
+                                        </p:inputMask>
+                                    </p>
+                                    <p>
+                                        <p:outputLabel for="txtLogradouro" id="lblLograd" value="Endereço:" />
+                                        <p:inputText id="txtLogradouro" value="#{endereco.endereco.logradouro}" maxlength="50" size="40" required="true" />
+                                    </p>
+                                    <p>
+                                        <p:outputLabel for="txtNumLograd" id="lblNumLograd" value="Número:" />
+                                        <p:inputText id="txtNumLograd" value="#{endereco.numero}" maxlength="5" size="5" required="true" />
+                                    </p>
+                                    <p>
+                                        <p:outputLabel for="txtBairro" id="lblBairro" value="Bairro:" />
+                                        <p:inputText id="txtBairro" value="#{endereco.endereco.bairro}" maxlength="30" size="25" required="true" />
+                                    </p>
+                                    <p>
+                                        <p:outputLabel  for="txtCidade" id="lblCidade" value="Cidade:" />
+                                        <p:inputText id="txtCidade" value="#{endereco.endereco.cidade}" maxlength="40" size="33" required="true" />
+                                    </p>
+                                    <p>
+                                        <p:outputLabel  for="cmbUf" id="lblUf" value="UF:" />
+                                        <p:selectOneMenu id="cmbUf" value="#{endereco.endereco.estado}" required="true">
+                                            <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                            <f:selectItems value="#{estadoMB.estados}" var="estado" itemValue="#{estado}" itemLabel="#{estado.nome}" />
+                                            <f:converter binding="#{estadoConverter}"/>
+                                        </p:selectOneMenu>
+                                    </p>
+                                </p:dataList>
+                            </p:outputPanel>
+                        </p:panel>
+                        <p:commandButton value="Salvar" action="#{colaboradorMB.salvar}" ajax="false"/>
                     </p:panel>
                 </h:form>
             </ui:define>

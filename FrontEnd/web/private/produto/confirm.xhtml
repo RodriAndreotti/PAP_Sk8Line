@@ -10,18 +10,19 @@
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
 
-                <h3>Produtos - Confirmar Exclusão</h3>
-                <p>
-                    <strong>Atenção:</strong><br/>Deseja realmente apagar o produto <h:outputText value="#{produtoMB.produto.nome}"/>?<br/>
-                    Esta ação não poderá ser desfeita!</p>
-                <h:form>
-                    <h:inputHidden id="hidProduto" value="#{produtoMB.produto}">
-                        <f:converter binding="#{produtoConverter}"/>
-                    </h:inputHidden>
-                    <p:commandButton class="btn btn-danger" value="Sim" action="#{produtoMB.apagar(true)}"/>
-                    <p:commandButton class="btn btn-primary" value="Não" action="#{produtoMB.apagar(false)}"/>
+                <p:panel header="Produtos - Confirmar Exclusão">
+                    <p>
+                        <strong>Atenção:</strong><br/>Deseja realmente apagar o produto <h:outputText value="#{produtoMB.produto.nome}"/>?<br/>
+                        Esta ação não poderá ser desfeita!</p>
+                    <h:form>
+                        <h:inputHidden id="hidProduto" value="#{produtoMB.produto}">
+                            <f:converter binding="#{produtoConverter}"/>
+                        </h:inputHidden>
+                        <p:commandButton class="btn btn-danger" value="Sim" action="#{produtoMB.apagar(true)}"/>
+                        <p:commandButton class="btn btn-primary" value="Não" action="#{produtoMB.apagar(false)}"/>
 
-                </h:form>
+                    </h:form>
+                </p:panel>
             </ui:define>
         </ui:composition>
 

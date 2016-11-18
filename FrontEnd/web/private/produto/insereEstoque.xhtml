@@ -11,21 +11,21 @@
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
 
-                <h3>Produtos - Inserir Estoque</h3>
+                <p:panel header="Produtos - Inserir Estoque">
 
-                <h:form id="frmProduto">
-                    <h:inputHidden id="hidEstoque" value="#{estoqueMB.estoque}">
-                        <f:converter binding="#{estoqueConverter}"/>
-                    </h:inputHidden>
-                    <p>
-                        <p:outputLabel for="txtQuantidade" value="Quantidade"/>
-                        <p:inputText id="txtQuantidade" value="#{estoqueMB.qtd}" class="form-control"/>
-                    </p>
+                    <h:form id="frmProduto">
+                        <h:inputHidden id="hidEstoque" value="#{estoqueMB.estoque}">
+                            <f:converter binding="#{estoqueConverter}"/>
+                        </h:inputHidden>
+                        <p>
+                            <p:outputLabel for="txtQuantidade" value="Quantidade"/>
+                            <p:inputText id="txtQuantidade" value="#{estoqueMB.qtd}" class="form-control"/>
+                        </p>
 
 
-                    <p:commandButton value="Inserir" action="#{estoqueMB.inserirEstoque()}" ajax="false"/>
-                </h:form>
-
+                        <p:commandButton value="Inserir" action="#{estoqueMB.inserirEstoque()}" ajax="false"/>
+                    </h:form>
+                </p:panel>
             </ui:define>
         </ui:composition>
     </h:body>

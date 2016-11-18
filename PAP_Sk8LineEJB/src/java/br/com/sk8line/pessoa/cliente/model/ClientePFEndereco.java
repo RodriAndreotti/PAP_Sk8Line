@@ -3,55 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.sk8line.pessoa.revendedor.model;
 
+package br.com.sk8line.pessoa.cliente.model;
+
+import br.com.sk8line.pessoa.cliente.model.*;
 import br.com.sk8line.common.model.Endereco;
+import br.com.sk8line.common.model.PessoaEndereco;
+import br.com.sk8line.pessoa.model.Pessoa;
 import java.io.Serializable;
-import javax.persistence.EmbeddedId;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- *
+ * 
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
 @Entity
-@Table(name = "endereco_revendedor")
-public class EnderecoRevendedor implements Serializable {
+@Table(name="cliente_endereco")
+@IdClass(ClienteEnderecoPK.class)
+public class ClientePFEndereco implements Serializable{
 
-    private static final long serialVersionUID = 1L;
-
-    @EmbeddedId
-    private RevEndPK pk;
-    
-    @OneToOne
-    private Revendedor revendedor;
-    
-    @OneToOne
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "endereco", referencedColumnName = "id_endereco")
     private Endereco endereco;
     
+    @Id
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="cliente")
+    private ClientePessoaFisica cliente;
+    
+    @Id
     private int numero;
-    private String complemento;
+    private String Complemento;
     private int tipo;
-
-    public RevEndPK getPk() {
-        return pk;
-    }
-
-    public void setPk(RevEndPK pk) {
-        this.pk = pk;
-    }
-
-    public Revendedor getRevendedor() {
-        return revendedor;
-    }
-
-    public void setRevendedor(Revendedor revendedor) {
-        this.revendedor = revendedor;
-    }
 
     public Endereco getEndereco() {
         return endereco;
@@ -61,6 +51,15 @@ public class EnderecoRevendedor implements Serializable {
         this.endereco = endereco;
     }
 
+    public ClientePessoaFisica getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClientePessoaFisica cliente) {
+        this.cliente = cliente;
+    }
+
+    
     public int getNumero() {
         return numero;
     }
@@ -70,11 +69,11 @@ public class EnderecoRevendedor implements Serializable {
     }
 
     public String getComplemento() {
-        return complemento;
+        return Complemento;
     }
 
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
+    public void setComplemento(String Complemento) {
+        this.Complemento = Complemento;
     }
 
     public int getTipo() {
@@ -84,6 +83,5 @@ public class EnderecoRevendedor implements Serializable {
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-    
     
 }

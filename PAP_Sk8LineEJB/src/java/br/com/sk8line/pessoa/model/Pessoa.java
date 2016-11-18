@@ -1,10 +1,11 @@
 package br.com.sk8line.pessoa.model;
 
-import br.com.sk8line.common.model.Endereco;
 import br.com.sk8line.usuario.model.Usuario;
-import java.util.ArrayList;
+import java.io.Serializable;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
@@ -13,27 +14,26 @@ import javax.persistence.OneToOne;
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
 
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable{
 
-    private int id;
+    private Integer id;
 
     private String nome;
 
     private String telefone;
 
-    private ArrayList enderecos;
-
-    
+   
     private Usuario usuario;
 
     
 
     @Id
-    public int getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -52,16 +52,7 @@ public abstract class Pessoa {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
     
-    public ArrayList<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(ArrayList enderecos) {
-        this.enderecos = enderecos;
-    }
-
     @OneToOne
     @JoinColumn(name = "usuario")
     public Usuario getUsuario() {
@@ -71,7 +62,4 @@ public abstract class Pessoa {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    
-
 }
