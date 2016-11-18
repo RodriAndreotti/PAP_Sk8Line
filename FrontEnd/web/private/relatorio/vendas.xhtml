@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <h:outputLabel value="Exportar"/>
+        <ui:composition template="/private/template/template.xhtml">
+            <ui:define name="content">
+                <h3>Relatório de Venda</h3>
+                <h:form>
+                    <h:outputText value="Exportar para:"/>
+                    <br/>
+                    <br/>
+                        <h:commandLink>
+                            <p:graphicImage library="images" name="excel.png" width="50"/>
+                            <p:dataExporter type="xls" target="tblRelatorio" fileName="VendasExcel" />
+                        </h:commandLink>
+                        <h:commandLink>
+                            <p:graphicImage library="images" name="pdf.png" width="50"/>
+                            <p:dataExporter type="pdf" target="tblRelatorio" fileName="VendasPDF"/>
+                        </h:commandLink>
+                        <p:dataTable id="tblRelatorio" var="venda" value="#{vendaMB.vendas}" class="table table-responsive table-hover" >
+                            <p:column headerText="ID Venda">
+                                <h:outputText value="#{venda.id}"/>
+                            </p:column>
+                            <p:column headerText="Valor total">
+                                <h:outputText value="#{venda.valorTotal}"/>
+                            </p:column>
+                        </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
