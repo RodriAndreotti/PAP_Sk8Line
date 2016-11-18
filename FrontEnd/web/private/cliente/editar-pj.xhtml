@@ -6,27 +6,36 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Cadastro de Cliente</title>
+        <title>Cadastro de Cliente PJ</title>
     </h:head>
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
                
                 <h:form id="frmCadastro">
-                    <p:panel id="PainelCadastro" header="Cadastro de Cliente">
-
-                        <p:panelGrid id="gridPnlCadastro" columns="2" styleClass="semBorda">
-                            <p:outputLabel id="lblNome" value="Nome:" />
-                            <p:inputText id="txtNome" value="" maxlength="50" size="40" />
-
-                            <p:outputLabel id="lblCpf" value="CPF:" />
-                            <p:inputMask id="txtCpf" value="" maxlength="16" size="10" mask="999.999.999-99" />
+                    <p:panel id="PainelCadastro" header="Cadastro de Cliente PJ">
+                        
+                            <p:panelGrid id="PainelCadastro" columns="2" styleClass="semBorda">
+                            <p:outputLabel id="lblFantasia" value="Nome Fantasia:" />
+                            <p:inputText id="txtNomeFantasia" value="" maxlength="50" size="40" />
+                                
+                            <p:outputLabel id="lblRazaoSocial" value="Razão Social:" />
+                            <p:inputText id="txtRazaoSocial" value="" maxlength="50" size="40" />
+                            
+                            <p:outputLabel id="lblCNPJ" value="CNPJ:" />
+                            <p:inputMask id="txtCNPJ" value="" maxlength="18" size="10" mask="00.000.000/0001-00" />
 
                             <p:outputLabel id="lblLograd" value="Endereço:" />
                             <p:inputText id="txtLogradouro" value="" maxlength="50" size="40" />
 
                             <p:outputLabel id="lblNumLograd" value="Número:" />
                             <p:inputText id="txtNumLograd" value="" maxlength="5" size="5" />
+                            
+                            <p:outputLabel id="lblLograd2" value="Endereço Alternativo:" />
+                            <p:inputText id="txtLogradouro2" value="" maxlength="50" size="40" />
+
+                            <p:outputLabel id="lblNumLograd2" value="Número:" />
+                            <p:inputText id="txtNumLograd2" value="" maxlength="5" size="5" />
 
                             <p:outputLabel id="lblBairro" value="Bairro:" />
                             <p:inputText id="txtBairro" value="" maxlength="30" size="25" />
@@ -39,7 +48,7 @@
 
                             <p:outputLabel id="lblUf" value="UF:" />
                             <p:selectOneMenu id="cmbUf" value="">
-                               <f:selectItem itemLabel="AC" itemValue="AC" />
+                                <f:selectItem itemLabel="AC" itemValue="AC" />
                                 <f:selectItem itemLabel="AL" itemValue="AL" />
                                 <f:selectItem itemLabel="AP" itemValue="AP" />
                                 <f:selectItem itemLabel="AM" itemValue="AM" />
@@ -65,15 +74,13 @@
                                 <f:selectItem itemLabel="SC" itemValue="SC" />
                                 <f:selectItem itemLabel="SP" itemValue="SP" />
                                 <f:selectItem itemLabel="SE" itemValue="SE" />
-                                <f:selectItem itemLabel="TO" itemValue="TO" />    
+                                <f:selectItem itemLabel="TO" itemValue="TO" />                                                          
                             </p:selectOneMenu>
 
                             <p:outputLabel id="lblTelFixo" value="Tel.Fixo:" />
-                            <p:inputMask id="txtTelFixo" value=""  maxlength="10" size="10" mask="(99)9999-9999" />
+                            <p:inputMask id="txtTelFixo" value=""  maxlength="11" size="10" mask="(99)9999-9999" />
 
-                            <p:outputLabel id="lblTelCelular" value="Tel.Celular:" />
-                            <p:inputMask id="txtTelCelular" value="" maxlength="11" size="10"  mask="(99)9999-9999" />
-
+                           
                             <p:commandButton id="btnSalvar" value="Salvar" image="ui-icon-disk" />
                             <p:commandButton id="btnCancelar" value="Cancelar" type="reset" image="ui-icon-cancel" />
 
