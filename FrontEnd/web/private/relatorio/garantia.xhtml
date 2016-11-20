@@ -23,15 +23,18 @@
                         <p:graphicImage library="images" name="pdf.png" width="50"/>
                         <p:dataExporter type="pdf" target="tblRelatorio" fileName="VendasPDF"/>
                     </h:commandLink>
-                    <p:dataTable id="tblRelatorio" var="termo" value="#{termoMB.termos}" class="table table-responsive table-hover" >
-                        <p:column headerText="ID Termo">
-                            <h:outputText value="#{termo.id}"/>
+                    <p:dataTable id="tblRelatorio" var="rma" value="#{rmaMB.rmas}" class="table table-responsive table-hover" >
+                        <p:column headerText="Cliente">
+                            <h:outputText value="#{rma.venda.cliente}"/>
                         </p:column>
-                        <p:column headerText="Termo">
-                            <h:outputText value="#{termo.titulo}"/>
+                        <p:column headerText="Produto">
+                            <h:outputText value="#{rma.produto.descricao}"/>
                         </p:column>
-                        <p:column headerText="Período">
-                            <h:outputText value="#{termo.periodo}"/>
+                        <p:column headerText="Situação">
+                            <h:outputText value="#{rma.situacao}"/>
+                        </p:column>
+                        <p:column headerText="Data de Finalização">
+                            <h:outputText value="#{rma.dataFinalizacao}"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

@@ -27,8 +27,14 @@
                             <p:column headerText="ID Venda">
                                 <h:outputText value="#{venda.id}"/>
                             </p:column>
+                            <p:column headerText="Email Cliente">
+                                <h:outputText value="#{venda.cliente.email}"/>
+                            </p:column>
                             <p:column headerText="Valor total">
                                 <h:outputText value="#{venda.valorTotal}"/>
+                            </p:column>
+                            <p:column headerText="Data da Venda">
+                                <h:outputText value="#{venda.dataVenda}"/>
                             </p:column>
                         </p:dataTable>
                 </h:form>
