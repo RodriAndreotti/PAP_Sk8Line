@@ -7,9 +7,11 @@ package br.com.sk8line.garantia.bean;
 
 import br.com.sk8line.garantia.ejb.RmaRemote;
 import br.com.sk8line.garantia.model.Rma;
+import br.com.sk8line.garantia.util.Situacao;
 import br.com.sk8line.produto.model.Produto;
 import br.com.sk8line.venda.model.Venda;
 import br.com.sk8line.venda.model.VendaItem;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,15 +20,19 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.model.SelectItem;
 
 /**
  *
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
 @Named(value = "rmaMB")
-@RequestScoped
-public class RmaMB {
+@SessionScoped
+public class RmaMB implements Serializable{
+
+    private static final long serialVersionUID = -4831614030024342700L;
 
     @EJB
     private RmaRemote ejb;
@@ -35,6 +41,8 @@ public class RmaMB {
     private Rma rma = new Rma();
     private List<Produto> produtos;
     private Produto produto = new Produto();
+    
+    
     /**
      * Creates a new instance of RmaMB
      */
@@ -53,6 +61,15 @@ public class RmaMB {
             }
         }
     }
+    
+    public SelectItem[] getSituacoes() {
+	SelectItem[] items = new SelectItem[Situacao.values().length];
+	int i = 0;
+	for(Situacao t: Situacao.values()) {
+		items[i++] = new SelectItem(t, t.toString());
+	}
+	return items;
+}
     
     private void resetAll() {
         this.rma = new Rma();
@@ -115,6 +132,7 @@ public class RmaMB {
     
     public String salvar(){
         rma.setProduto(this.produto);
+        this.rma.setSituacao(Situacao.ABERTO);
         this.rma = this.ejb.salvar(rma);
         FacesMessage fm;
         if(this.rma != null){
@@ -127,6 +145,6 @@ public class RmaMB {
         this.rma = new Rma();
         this.rmas = this.ejb.listar();
         
-        return "/private/rma/editar.xhtml";
+        return "/private/rma/listar.xhtml";
     }
 }

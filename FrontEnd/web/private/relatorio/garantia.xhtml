@@ -17,18 +17,18 @@
                     <br/>
                     <h:commandLink>
                         <p:graphicImage library="images" name="excel.png" width="50"/>
-                        <p:dataExporter type="xls" target="tblRelatorio" fileName="VendasExcel" />
+                        <p:dataExporter type="xls" target="tblRelatorio" fileName="GaraniaExcel" />
                     </h:commandLink>
                     <h:commandLink>
                         <p:graphicImage library="images" name="pdf.png" width="50"/>
-                        <p:dataExporter type="pdf" target="tblRelatorio" fileName="VendasPDF"/>
+                        <p:dataExporter type="pdf" target="tblRelatorio" fileName="GaraniaPDF"/>
                     </h:commandLink>
                     <p:dataTable id="tblRelatorio" var="rma" value="#{rmaMB.rmas}" class="table table-responsive table-hover" >
                         <p:column headerText="Cliente">
-                            <h:outputText value="#{rma.venda.cliente}"/>
+                            <h:outputText value="#{rma.venda.cliente.email}"/>
                         </p:column>
                         <p:column headerText="Produto">
-                            <h:outputText value="#{rma.produto.descricao}"/>
+                            <h:outputText value="#{rma.produto.nome}"/>
                         </p:column>
                         <p:column headerText="Situação">
                             <h:outputText value="#{rma.situacao}"/>

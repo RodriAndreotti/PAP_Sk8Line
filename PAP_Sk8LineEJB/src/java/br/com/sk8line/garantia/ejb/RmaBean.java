@@ -21,7 +21,7 @@ public class RmaBean implements RmaRemote{
 
     @Override
     public Rma salvar(Rma rma) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return RmaDAO.getInstance().salvar(rma);
     }
 
     @Override

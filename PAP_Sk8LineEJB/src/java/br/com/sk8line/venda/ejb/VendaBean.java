@@ -5,9 +5,13 @@
  */
 package br.com.sk8line.venda.ejb;
 
+import br.com.sk8line.produto.dao.EstoqueDAO;
+import br.com.sk8line.produto.model.Estoque;
 import br.com.sk8line.venda.dao.VendaDAO;
 import br.com.sk8line.venda.model.Venda;
+import br.com.sk8line.venda.model.VendaItem;
 import java.util.List;
+import java.util.ListIterator;
 import javax.ejb.Stateless;
 
 /**
@@ -19,7 +23,18 @@ public class VendaBean implements VendaRemote {
 
     @Override
     public Venda salvar(Venda venda) {
-        return VendaDAO.getInstance().salvar(venda);
+        Venda v = VendaDAO.getInstance().salvar(venda);
+        if(v != null){
+            ListIterator it = v.getProdutos().listIterator();
+            while(it.hasNext()){
+                VendaItem item = (VendaItem) it.next();
+                Estoque estoque = item.getProduto().getEstoque();
+                estoque.setQuantidade(estoque.getQuantidade() - item.getQuantidade());
+                EstoqueDAO.getInstance().atualizar(estoque);
+            }
+        }
+        
+        return venda;
     }
 
     @Override

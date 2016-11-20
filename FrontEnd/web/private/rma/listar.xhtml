@@ -20,31 +20,33 @@ and open the template in the editor.
 
                 <h3>Termos de Garantia</h3>
                 <p:dataTable var="rma" value="#{rmaMB.rmas}" class="table table-responsive table-hover">
-                    <p:column headerText="Cliente">
-                        <h:outputText value="#{rma.venda.cliente.email}"/>
-                    </p:column>
-                    <p:column headerText="Produto">
-                        <h:outputText value="#{rma.produto.nome}"/>
-                    </p:column>
-                    <p:column headerText="Data Abertura">
-                        <h:outputText value="#{rma.dataEntrada}">
-                            <f:convertDateTime dateStyle="full"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:column headerText="Data Finalização">
-                        <h:outputText value="#{rma.dataFinalizacao}">
-                            <f:convertDateTime dateStyle="full"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:column headerText="Situacao">
-                        <h:outputText value="#{rma.situacao}"/>
-                    </p:column>
-                    
-                    <p:column headerText="">
-                        <h:form>
-                            <p:commandButton class="btn btn-info" value="Editar" action="#{vendaMB.editar(venda)}"/>
-                        </h:form>
-                    </p:column>
+                    <h:form>
+                        <p:column headerText="Cliente">
+                            <h:outputText value="#{rma.venda.cliente.email}"/>
+                        </p:column>
+                        <p:column headerText="Produto">
+                            <h:outputText value="#{rma.produto.nome}"/>
+                        </p:column>
+                        <p:column headerText="Data Abertura">
+                            <h:outputText value="#{rma.dataEntrada}">
+                                <f:convertDateTime dateStyle="full"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Data Finalização">
+                            <h:outputText value="#{rma.dataFinalizacao}">
+                                <f:convertDateTime dateStyle="full"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Situacao">
+                            <h:outputText value="#{rma.situacao}"/>
+                        </p:column>
+
+                        <p:column headerText="">
+
+                            <p:commandButton class="btn btn-info" value="Alterar Status" action="" ajax="false"/>
+
+                        </p:column>
+                    </h:form>
                 </p:dataTable>
             </ui:define>
         </ui:composition>
