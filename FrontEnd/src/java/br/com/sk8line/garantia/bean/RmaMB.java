@@ -11,6 +11,7 @@ import br.com.sk8line.produto.model.Produto;
 import br.com.sk8line.venda.model.Venda;
 import br.com.sk8line.venda.model.VendaItem;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import javax.annotation.PostConstruct;
@@ -43,13 +44,21 @@ public class RmaMB {
     @PostConstruct
     private void init(){
         this.rmas = ejb.listar();
+        this.resetAll();
         this.produtos = new ArrayList<>();
-        if(this.rma.getVenda() != null){
+        if(this.rma.getVenda().getProdutos() != null){
             ListIterator it = this.rma.getVenda().getProdutos().listIterator();
             while(it.hasNext()){
                 this.produtos.add(((VendaItem) it.next()).getProduto());
             }
         }
+    }
+    
+    private void resetAll() {
+        this.rma = new Rma();
+        this.rma.setDataEntrada(new Date());
+        this.rma.setVenda(new Venda());
+        this.rma.setProduto(new Produto());
     }
 
     public List<Rma> getRmas() {

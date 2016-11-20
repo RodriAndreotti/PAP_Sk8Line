@@ -6,8 +6,12 @@
 package br.com.sk8line.venda.dao;
 
 import br.com.sk8line.common.dao.DAO;
+import br.com.sk8line.produto.model.Produto;
 import br.com.sk8line.venda.model.Venda;
+import br.com.sk8line.venda.model.VendaItem;
 import java.util.List;
+import java.util.ListIterator;
+import javax.persistence.LockModeType;
 import javax.ws.rs.NotFoundException;
 
 /**
@@ -38,7 +42,15 @@ public class VendaDAO extends DAO {
     public Venda salvar(Venda venda) {
 
         if (venda.getId() == 0) {
+            ListIterator it = venda.getProdutos().listIterator();
+            while(it.hasNext()){
+                VendaItem item = (VendaItem) it.next();
+                item.setProduto(this.getEntityManager().find(Produto.class,item.getProduto().getId()));
+                item.setVenda(venda);
+                this.getEntityManager().lock(item.getProduto(), LockModeType.NONE);
+            }
             this.getEntityManager().persist(venda);
+            this.getEntityManager().flush();
         } else {
             if (!this.getEntityManager().contains(venda)) {
                 if (this.getEntityManager().find(Venda.class, venda.getId()) == null) {

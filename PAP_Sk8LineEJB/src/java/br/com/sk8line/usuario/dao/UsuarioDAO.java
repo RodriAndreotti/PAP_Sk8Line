@@ -131,4 +131,8 @@ public class UsuarioDAO extends DAO {
 
         return usuario;
     }
+
+    public Usuario getById(int id) {
+        return this.getEntityManager().find(Usuario.class, id);
+    }
 }

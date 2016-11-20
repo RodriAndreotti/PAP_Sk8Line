@@ -56,13 +56,14 @@ public class Venda implements Serializable {
     @JoinColumn(name = "cliente", referencedColumnName = "id_usuario")
     private Usuario cliente;
 
-    @Column(name = "valor_total")
-    private BigDecimal valorTotal;
+    @Column(name = "valor_total", scale = 3, precision = 13)
+    private BigDecimal valorTotal = new BigDecimal(0);
 
-    private double desconto;
+    @Column(scale = 3, precision = 13)
+    private BigDecimal desconto = new BigDecimal(0);
 
-    @Column(name = "valor_liquido")
-    private BigDecimal valorLiquido;
+    @Column(name = "valor_liquido", scale = 3, precision = 13)
+    private BigDecimal valorLiquido = new BigDecimal(0);
 
     private boolean concretizada;
 
@@ -91,16 +92,16 @@ public class Venda implements Serializable {
         BigDecimal qtdBD = new BigDecimal(qtd);
         item.setValorTotal(valor.multiply(qtdBD));
         
+        this.valorTotal = this.valorTotal.add(item.getValorTotal());
+
+        this.valorLiquido = this.valorTotal
+                .subtract(this.valorTotal.multiply(this.desconto)
+                        .divide(new BigDecimal(100.0)));
+        
         this.produtos.add(item);
     }
 
-    public void removerProduto(Produto produto) {
 
-    }
-
-    public void finalizarVenda() {
-
-    }
 
     public int getId() {
         return id;
@@ -134,11 +135,11 @@ public class Venda implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    public double getDesconto() {
+    public BigDecimal getDesconto() {
         return desconto;
     }
 
-    public void setDesconto(double desconto) {
+    public void setDesconto(BigDecimal desconto) {
         this.desconto = desconto;
     }
 
@@ -190,7 +191,7 @@ public class Venda implements Serializable {
         hash = 29 * hash + Objects.hashCode(this.vendedor);
         hash = 29 * hash + Objects.hashCode(this.cliente);
         hash = 29 * hash + Objects.hashCode(this.valorTotal);
-        hash = 29 * hash + (int) (Double.doubleToLongBits(this.desconto) ^ (Double.doubleToLongBits(this.desconto) >>> 32));
+        hash = 29 * hash + Objects.hashCode(this.valorTotal);
         hash = 29 * hash + Objects.hashCode(this.valorLiquido);
         hash = 29 * hash + (this.concretizada ? 1 : 0);
         hash = 29 * hash + Objects.hashCode(this.situacao);
@@ -214,7 +215,7 @@ public class Venda implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (Double.doubleToLongBits(this.desconto) != Double.doubleToLongBits(other.desconto)) {
+        if (!Objects.equals(this.valorTotal, other.valorTotal)) {
             return false;
         }
         if (this.concretizada != other.concretizada) {
@@ -242,6 +243,10 @@ public class Venda implements Serializable {
             return false;
         }*/
         return true;
+    }
+
+    public void recalcular() {
+        this.valorLiquido = this.valorTotal.multiply(this.desconto).divide(new BigDecimal(100));
     }
 
 }

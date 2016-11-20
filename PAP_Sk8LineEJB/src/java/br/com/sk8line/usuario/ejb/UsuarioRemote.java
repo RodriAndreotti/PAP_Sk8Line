@@ -17,4 +17,5 @@ import javax.ejb.Remote;
 public interface UsuarioRemote{
     public Usuario doLogin(String login, String senha);
     public boolean existeLogin(String login);
+    public Usuario getById(int id);
 }

@@ -13,10 +13,10 @@
                 <h3>Termos de Garantia</h3>
                 <p:dataTable var="vendas" value="#{vendaMB.vendas}" class="table table-responsive table-hover">
                     <p:column headerText="Vendedor">
-                        <h:outputText value="#{vendas.vendedor}"/>
+                        <h:outputText value="#{vendas.vendedor.email}"/>
                     </p:column>
                     <p:column headerText="Cliente">
-                        <h:outputText value="#{vendas.valorTotal}"/>
+                        <h:outputText value="#{vendas.cliente.email}"/>
                     </p:column>
                     <p:column headerText="Valor Total">
                         <h:outputText value="#{vendas.valorTotal}"/>
@@ -40,12 +40,6 @@
                         <h:outputText value="#{vendas.dataVenda}">
                             <f:convertDateTime timeStyle="full"  locale="pt_BR" dateStyle="long" pattern="dd/MM/yyyy HH:mm"/>
                         </h:outputText>
-                    </p:column>
-                    <p:column headerText="">
-                        <h:form>
-                            <p:commandButton class="btn btn-info" value="Editar" action="#{vendaMB.editar(venda)}"/>
-                            <p:commandButton class="btn btn-danger" value="Apagar" action="#{vendaMB.apagar(venda)}"/>
-                        </h:form>
                     </p:column>
                 </p:dataTable>
             </ui:define>

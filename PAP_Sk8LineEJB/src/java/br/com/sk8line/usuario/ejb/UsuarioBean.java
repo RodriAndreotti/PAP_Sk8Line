@@ -31,4 +31,9 @@ public class UsuarioBean implements UsuarioRemote {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Usuario getById(int id) {
+        return this.dao.getById(id);
+    }
+
 }

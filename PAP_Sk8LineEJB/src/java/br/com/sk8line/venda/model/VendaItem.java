@@ -92,6 +92,11 @@ public class VendaItem implements Serializable {
         this.valorTotal = valorTotal;
     }
 
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 7;

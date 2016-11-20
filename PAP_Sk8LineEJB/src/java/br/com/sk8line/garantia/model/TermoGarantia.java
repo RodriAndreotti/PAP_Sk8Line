@@ -60,10 +60,10 @@ public class TermoGarantia implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.id;
-        hash = 79 * hash + Objects.hashCode(this.titulo);
-        hash = 79 * hash + this.periodo;
-        hash = 79 * hash + Objects.hashCode(this.termos);
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.titulo);
+        hash = 23 * hash + this.periodo;
+        hash = 23 * hash + Objects.hashCode(this.termos);
         return hash;
     }
 
@@ -82,21 +82,15 @@ public class TermoGarantia implements Serializable{
         if (this.id != other.id) {
             return false;
         }
-        if (this.periodo != other.periodo) {
+        if (this.periodo != other.getPeriodo()) {
             return false;
         }
-        if (!Objects.equals(this.titulo, other.titulo)) {
+        if (!Objects.equals(this.titulo, other.getTitulo())) {
             return false;
         }
-        if (!Objects.equals(this.termos, other.termos)) {
+        if (!Objects.equals(this.termos, other.getTitulo())) {
             return false;
         }
         return true;
     }
-
-    
-
-    
-
-    
 }

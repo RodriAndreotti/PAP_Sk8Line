@@ -154,30 +154,30 @@ public class Produto implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (Double.doubleToLongBits(this.largura) != Double.doubleToLongBits(other.largura)) {
+        if (Double.doubleToLongBits(this.largura) != Double.doubleToLongBits(other.getLargura())) {
             return false;
         }
-        if (Double.doubleToLongBits(this.altura) != Double.doubleToLongBits(other.altura)) {
+        if (Double.doubleToLongBits(this.altura) != Double.doubleToLongBits(other.getAltura())) {
             return false;
         }
-        if (Double.doubleToLongBits(this.comprimento) != Double.doubleToLongBits(other.comprimento)) {
+        if (Double.doubleToLongBits(this.comprimento) != Double.doubleToLongBits(other.getComprimento())) {
             return false;
         }
-        if (Double.doubleToLongBits(this.valor) != Double.doubleToLongBits(other.valor)) {
+        if (Double.doubleToLongBits(this.valor) != Double.doubleToLongBits(other.getValor())) {
             return false;
         }
-        if (!Objects.equals(this.nome, other.nome)) {
+        if (!this.nome.equals(other.getNome())) {
             return false;
         }
-        if (!Objects.equals(this.descricao, other.descricao)) {
+        if (!this.descricao.equals(other.getDescricao())) {
             return false;
         }
-        if (!Objects.equals(this.termoGarantia, other.termoGarantia)) {
+        /*if (!this.termoGarantia.equals(other.getTermoGarantia())) {
             return false;
         }
-        if (!Objects.equals(this.estoque, other.estoque)) {
+        if (!this.estoque.equals(other.getEstoque())) {
             return false;
-        }
+        }*/
         return true;
     }
 
