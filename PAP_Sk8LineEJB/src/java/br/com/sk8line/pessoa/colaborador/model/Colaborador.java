@@ -36,7 +36,7 @@ public class Colaborador extends PessoaFisica implements Serializable {
         return super.getUsuario();
     }
     
-    @OneToMany(mappedBy = "colaborador", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<ColaboradorEndereco> getEnderecos() {
         return enderecos;
     }

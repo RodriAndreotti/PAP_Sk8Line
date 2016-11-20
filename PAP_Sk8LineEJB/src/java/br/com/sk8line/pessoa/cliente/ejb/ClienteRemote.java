@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.sk8line.pessoa.ejb;
+package br.com.sk8line.pessoa.cliente.ejb;
 
+import br.com.sk8line.pessoa.cliente.model.ClientePessoaFisica;
 import br.com.sk8line.pessoa.model.Pessoa;
 import java.util.List;
 
@@ -14,9 +15,9 @@ import java.util.List;
  */
 public interface ClienteRemote {
 
-    public Pessoa salvar(Pessoa pessoa);
+    public ClientePessoaFisica salvar(ClientePessoaFisica pessoa);
 
-    public List<Pessoa> listar();
+    public List<ClientePessoaFisica> listar();
 
-    public boolean apagar(Pessoa pessoa);
+    public boolean apagar(ClientePessoaFisica pessoa);
 }

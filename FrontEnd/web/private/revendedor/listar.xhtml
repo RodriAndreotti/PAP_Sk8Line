@@ -12,7 +12,7 @@
                 <h3>Termos de Garantia</h3>
                 <p:dataTable var="revendedor" value="#{revendedorMB.revendedores}" class="table table-responsive table-hover">
                     <p:column headerText="Razão Social">
-                        <h:outputText value="#{revendedor.razaoSocial}"/>
+                        <h:outputText value="#{revendedor.nome}"/>
                     </p:column>
                     <p:column headerText="CNPJ">
                         <h:outputText value="#{revendedor.cnpj}"/>
@@ -20,13 +20,12 @@
                     <p:column headerText="Telefone">
                         <h:outputText value="#{revendedor.telefone}"/>
                     </p:column>
-                    <p:column headerText="Endereço">
-                        <h:outputText value="#{revendedor.enderecos}"/>
+                    <p:column headerText="Email">
+                        <h:outputText value="#{revendedor.usuario.email}"/>
                     </p:column>
                     <p:column headerText="">
                         <h:form>
-                            <p:commandButton class="btn btn-info" value="Editar" action="#{revendedoMB.editar(revendedor)}"/>
-                            <p:commandButton class="btn btn-danger" value="Apagar" action="#{revendedorMB.apagar(revendedor)}"/>
+                            <p:commandButton class="btn btn-info" value="Editar" action="#{revendedorMB.editar(revendedor)}" ajax="false" />
                         </h:form>
                     </p:column>
                 </p:dataTable>

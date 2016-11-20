@@ -8,14 +8,21 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-@AttributeOverride(name = "id", column = @Column(name = "id_revendedor"))
+@Table(name = "Cliente")
+@AttributeOverride(name = "id", column = @Column(name = "id_cliente"))
+@NamedQuery(name = "Cliente.findAll", query = "SELECT cl FROM ClientePessoaFisica cl")
 public class ClientePessoaFisica extends PessoaFisica implements Serializable{
+
+    private static final long serialVersionUID = -760663461066899189L;
 
     
     private List<ClientePFEndereco> enderecos = new java.util.ArrayList<>();
@@ -28,7 +35,7 @@ public class ClientePessoaFisica extends PessoaFisica implements Serializable{
     }
 
 
-    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<ClientePFEndereco> getEnderecos() {
         return enderecos;
     }

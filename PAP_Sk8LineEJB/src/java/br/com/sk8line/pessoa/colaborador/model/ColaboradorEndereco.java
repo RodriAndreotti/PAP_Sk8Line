@@ -6,17 +6,13 @@
 
 package br.com.sk8line.pessoa.colaborador.model;
 
-import br.com.sk8line.common.dao.EnderecoDAO;
 import br.com.sk8line.common.model.Endereco;
-import br.com.sk8line.common.model.PessoaEndereco;
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 /**
@@ -26,7 +22,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="colaborador_endereco")
 @IdClass(ColaboradorEnderecoPK.class)
-public class ColaboradorEndereco extends PessoaEndereco implements Serializable{
+public class ColaboradorEndereco implements Serializable{
+
+    private static final long serialVersionUID = 4098872462001012771L;
     
     @Id
     @ManyToOne
@@ -72,11 +70,6 @@ public class ColaboradorEndereco extends PessoaEndereco implements Serializable{
 
     public void setComplemento(String Complemento) {
         this.Complemento = Complemento;
-    }
-
-    @PrePersist
-    private void loadReference(){
-        this.setEndereco(EnderecoDAO.getInstance().loadReference(this.getEndereco()));
     }
     
 }

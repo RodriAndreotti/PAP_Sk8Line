@@ -28,6 +28,8 @@ import javax.persistence.Table;
 @IdClass(ClienteEnderecoPK.class)
 public class ClientePFEndereco implements Serializable{
 
+    private static final long serialVersionUID = 4382473928128382463L;
+
     @Id
     @ManyToOne
     @JoinColumn(name = "endereco", referencedColumnName = "id_endereco")
@@ -35,7 +37,7 @@ public class ClientePFEndereco implements Serializable{
     
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="cliente")
+    @JoinColumn(name="cliente", referencedColumnName = "id_cliente")
     private ClientePessoaFisica cliente;
     
     @Id

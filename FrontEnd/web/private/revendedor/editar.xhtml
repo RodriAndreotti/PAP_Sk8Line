@@ -4,47 +4,88 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      <h:head>
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
-                <script type="text/javascript">
-                    function  verificarCampos() {
-                        if (document.getElementById("txtRazaoSocial").value === null) {
-                            alert("Razão social não pode estar vazio!");
-                            return false;
-                        }
-                        if (document.getElementById("txtcnpj").value === null) {
-                            alert("CNPJ não pode estar vazio!");
-                            return false;
-                        }
-                        if (document.getElementById("txtTelefone").value === null) {
-                            alert("Telefone não pode estar vazio!");
-                            return false;
-                        }
-                        if (document.getElementById("txtEndereco").value === null) {
-                            alert("Endereço não pode estar vazio!");
-                            return false;
-                        }
-                    }
-                </script>
+
                 <h:form id="form">
                     <p:panel header="Cadastro de Revendedor">
                         <h:panelGrid columns="2">
-                            <h:outputLabel value="Razão Social:" for="Razão Social" />
-                            <p:inputText id="txtRazaoSocial" label="Razão Social" value="#{revendedorMB.revendedor.razaoSocial}" maxlength="50" size="40" />
-                            <h:outputLabel value="CNPJ:" for="cnpj" />
-                            <p:inputText id="txtcnpj" label="cnpj" value="#{revendedorMB.revendedor.cnpj}" maxlength="14" size="20"  />
-                            <h:outputLabel value="Telefone:" for="telefone" />
-                            <p:inputText id="txtTelefone" label="telefone" value="#{revendedorMB.revendedor.telefone}" maxlength="12" size="20"  />
-                            <h:outputLabel value="Endereço:" for="endereco" />
-                            <p:inputText id="txtEndereco" label="Endereco" value="#{revendedorMB.revendedor.enderecos}" maxlength="150" size="40"  />
-                            <h:column>
-                                <p:commandButton  value="SALVAR" title="Salvar" action="#{revendedorMB.salvar()}"  ajax="false"/>
-                            </h:column>
-                        </h:panelGrid>     
+                            <p:panel>
+                                <p>
+                                <p:outputLabel value="Razão Social:" for="txtRazaoSocial" />
+                                <p:inputText id="txtRazaoSocial" label="Razão Social" value="#{revendedorMB.revendedor.nome}" maxlength="50" size="40" required="true" />
+                                </p>
+                                <p>
+                                <p:outputLabel value="CNPJ:" for="txtcnpj" />
+                                <p:inputMask id="txtcnpj" label="cnpj" value="#{revendedorMB.revendedor.cnpj}" maxlength="14" size="20"  mask="99.999.999/9999-99" required="true" />
+                                </p>
+                                <p>
+                                <p:outputLabel value="Telefone:" for="txtTelefone" />
+                                <p:inputMask id="txtTelefone" label="telefone" value="#{revendedorMB.revendedor.telefone}" maxlength="12" size="20" mask="(99) 9999-9999?9" required="true" />
+                                </p>
+
+                            </p:panel>
+                            <p:panel>
+                                <p>
+                                    <p:outputLabel for="txtEmail" value="Usuário"/>
+                                    <p:inputText id="txtEmail" value="#{revendedorMB.revendedor.usuario.email}" class="form-control" required="true"/>
+                                </p>
+                                <p>
+                                    <p:outputLabel for="txtSenha" value="Senha"/>
+                                    <p:password id="txtSenha" value="#{revendedorMB.revendedor.usuario.senha}" class="form-control" match="txtConfirmSenha"  required="true"/>
+                                </p>
+                                <p>
+                                    <p:outputLabel for="txtConfirmSenha" value="Confirmar Senha"/>
+                                    <p:password id="txtConfirmSenha" value="#{revendedorMB.revendedor.usuario.senha}" class="form-control" required="true"/>
+                                </p>
+                                
+                            </p:panel>
+                        </h:panelGrid>
+
+                        <p:panel header="Endereço">
+                            <p:outputPanel id="lstEndereco" class="lstEndereco">
+                                <p:dataList value="#{revendedorMB.revendedor.enderecos}" var="endereco">
+                                    <h:inputHidden id="hidIdEndereco" value="#{endereco.endereco.id}"/>
+                                    <p>
+                                        <p:outputLabel for="txtCep" id="lblCep" value="CEP:" />
+                                        <p:inputMask id="txtCep" value="#{endereco.endereco.cep}" maxlength="9" size="9" mask="99999-999" required="true">
+                                            <p:ajax event="blur" listener="#{revendedorMB.buscaCep(endereco.endereco)}" update="hidIdEndereco txtLogradouro txtBairro txtCidade cmbUf" />
+                                        </p:inputMask>
+                                    </p>
+                                    <p>
+                                        <p:outputLabel for="txtLogradouro" id="lblLograd" value="Endereço:" />
+                                        <p:inputText id="txtLogradouro" value="#{endereco.endereco.logradouro}" maxlength="50" size="40" required="true" />
+                                    </p>
+                                    <p>
+                                        <p:outputLabel for="txtNumLograd" id="lblNumLograd" value="Número:" />
+                                        <p:inputText id="txtNumLograd" value="#{endereco.numero}" maxlength="5" size="5" required="true" />
+                                    </p>
+                                    <p>
+                                        <p:outputLabel for="txtBairro" id="lblBairro" value="Bairro:" />
+                                        <p:inputText id="txtBairro" value="#{endereco.endereco.bairro}" maxlength="30" size="25" required="true" />
+                                    </p>
+                                    <p>
+                                        <p:outputLabel  for="txtCidade" id="lblCidade" value="Cidade:" />
+                                        <p:inputText id="txtCidade" value="#{endereco.endereco.cidade}" maxlength="40" size="33" required="true" />
+                                    </p>
+                                    <p>
+                                        <p:outputLabel  for="cmbUf" id="lblUf" value="UF:" />
+                                        <p:selectOneMenu id="cmbUf" value="#{endereco.endereco.estado}" required="true">
+                                            <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                            <f:selectItems value="#{estadoMB.estados}" var="estado" itemValue="#{estado}" itemLabel="#{estado.nome}" />
+                                            <f:converter binding="#{estadoConverter}"/>
+                                        </p:selectOneMenu>
+                                    </p>
+                                </p:dataList>
+                            </p:outputPanel>
+                        </p:panel>
+                        <p:commandButton value="Salvar" action="#{revendedorMB.salvar}" ajax="false"/>
                     </p:panel>
                 </h:form>
 

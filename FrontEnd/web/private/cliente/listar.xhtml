@@ -15,7 +15,7 @@
         <ui:composition template="/private/template/template.xhtml">
             <ui:define name="content">
                 <p:panel header="Clientes">
-                    <p:dataTable var="cliente" value="#{clienteMB.colaboradores}" class="table table-responsive table-hover">
+                    <p:dataTable var="cliente" value="#{clienteMB.clientes}" class="table table-responsive table-hover">
                         <p:column headerText="Nome">
                             <h:outputText value="#{cliente.nome}"/>
                         </p:column>
@@ -25,14 +25,13 @@
                         <p:column headerText="Telefone">
                             <h:outputText value="#{cliente.telefone}"/>
                         </p:column>
-                        <p:column headerText="Email (Nome de Usuário">
+                        <p:column headerText="Email (Nome de Usuário)">
                             <h:outputText value="#{cliente.usuario.email}"/>
                         </p:column>
                         
                         <p:column headerText="">
                             <h:form>
                                 <p:commandButton class="btn btn-info" value="Editar" action="#{clienteMB.editar(cliente)}"/>
-                                <p:commandButton class="btn btn-danger" value="Apagar" action="#{clienteMB.confirm(cliente)}"/>
                             </h:form>
                         </p:column>
                     </p:dataTable>

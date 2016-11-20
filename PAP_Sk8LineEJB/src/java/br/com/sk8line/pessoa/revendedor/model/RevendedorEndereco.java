@@ -7,9 +7,7 @@
 package br.com.sk8line.pessoa.revendedor.model;
 
 import br.com.sk8line.common.model.Endereco;
-import br.com.sk8line.pessoa.colaborador.model.Colaborador;
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -22,17 +20,20 @@ import javax.persistence.Table;
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
 @Entity
-@Table(name="colaborador_endereco")
+@Table(name="revendedor_endereco")
 @IdClass(RevendedorEnderecoPK.class)
-class RevendedorEndereco  implements Serializable{
+public class RevendedorEndereco  implements Serializable{
+
+    private static final long serialVersionUID = 3136787431603416800L;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "endereco", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "revendedor")
+    @ManyToOne
+    @JoinColumn(name = "revendedor", referencedColumnName = "id_revendedor")
     private Revendedor revendedor;
 
     @Id

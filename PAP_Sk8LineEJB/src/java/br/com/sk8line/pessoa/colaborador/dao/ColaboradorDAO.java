@@ -13,6 +13,7 @@ import br.com.sk8line.pessoa.colaborador.model.ColaboradorEndereco;
 import br.com.sk8line.usuario.model.Usuario;
 import java.util.List;
 import java.util.ListIterator;
+import javax.persistence.LockModeType;
 import javax.ws.rs.NotFoundException;
 
 /**
@@ -43,15 +44,18 @@ public class ColaboradorDAO extends DAO {
     public Colaborador salvar(Colaborador colaborador) {
 
         if (colaborador.getId() == null) {
-            this.getEntityManager().persist(colaborador);
-            this.getEntityManager().flush();
             ListIterator<ColaboradorEndereco> end = colaborador.getEnderecos().listIterator();
             while (end.hasNext()) {
                 ColaboradorEndereco endereco = (ColaboradorEndereco) end.next();
                 endereco.setEndereco(this.getEntityManager().find(Endereco.class, endereco.getEndereco().getId()));
+                this.getEntityManager().lock(endereco.getEndereco(), LockModeType.NONE);
 
-                this.getEntityManager().merge(endereco);
+                // this.getEntityManager().merge(endereco);
             }
+            
+            this.getEntityManager().persist(colaborador);
+            this.getEntityManager().flush();
+            
         } else {
             if (!this.getEntityManager().contains(colaborador)) {
                 if (this.getEntityManager().find(Colaborador.class, colaborador.getId()) == null) {

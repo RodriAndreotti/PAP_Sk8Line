@@ -42,7 +42,7 @@ public class EnderecoDAO extends DAO{
             TypedQuery<Endereco> typedQuery = this.getEntityManager().createQuery(
                     estadoQuery
                             .where(
-                                    builder.like(end.<String>get("cep"), cep)
+                                    builder.like(end.<String>get("cep"), cep.replaceAll("_", ""))
                             )
             );
 

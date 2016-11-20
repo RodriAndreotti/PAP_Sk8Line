@@ -5,14 +5,19 @@
  */
 package br.com.sk8line.pessoa.cliente.bean;
 
-import br.com.sk8line.pessoa.ejb.ClienteRemote;
+import br.com.sk8line.common.ejb.EnderecoRemote;
+import br.com.sk8line.common.ejb.EstadoRemote;
+import br.com.sk8line.common.model.Endereco;
+import br.com.sk8line.common.model.Estado;
+import br.com.sk8line.common.service.CepWebService;
+import br.com.sk8line.pessoa.cliente.model.ClientePFEndereco;
+import br.com.sk8line.pessoa.cliente.ejb.ClienteRemote;
 import br.com.sk8line.pessoa.cliente.model.ClientePessoaFisica;
-import br.com.sk8line.pessoa.cliente.model.ClientePessoaJuridica;
-import br.com.sk8line.pessoa.model.Pessoa;
-import br.com.sk8line.pessoa.model.PessoaFisica;
-import br.com.sk8line.pessoa.model.PessoaJuridica;
+import br.com.sk8line.usuario.ejb.RoleRemote;
+import br.com.sk8line.usuario.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -24,86 +29,132 @@ import javax.inject.Named;
  *
  * @author leonardo.lima
  */
-@Named(value = "pessoaMB")
+@Named(value = "clienteMB")
 @RequestScoped
 public class ClienteMB {
 
     @EJB
     private ClienteRemote ejb;
-    private List<Pessoa> pessoas = new ArrayList();
-    private Pessoa pessoaFisica = new ClientePessoaFisica();
-    private Pessoa pessoaJuridica  = new ClientePessoaJuridica();
+    private List<ClientePessoaFisica> clientes = new ArrayList();
+    private ClientePessoaFisica cliente = new ClientePessoaFisica();
+    
+    @EJB
+    private EstadoRemote ejbEstado;
+    @EJB
+    private EnderecoRemote ejbEndereco;
+    @EJB
+    private RoleRemote ejbRole;
 
     @PostConstruct
     public void init() {
-        this.pessoas = ejb.listar();
+        this.clientes = ejb.listar();
+        resetAll();
     }
 
-    public List<Pessoa> getPessoas() {
-        return pessoas;
+    public List<ClientePessoaFisica> getClientes() {
+        return clientes;
     }
 
-    public void setPessoas(List<Pessoa> pessoa) {
-        this.pessoas = pessoa;
+    public void setClientes(List<ClientePessoaFisica> clientes) {
+        this.clientes = clientes;
     }
 
-    public Pessoa getPessoaFisica() {
-        return pessoaFisica;
+    public ClientePessoaFisica getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClientePessoaFisica cliente) {
+        this.cliente = cliente;
+    }
+
+
+    
+    
+     /**
+     * Reinicializa a variável cliente com um endereço e um usuário vazios
+     */
+    private void resetAll() {
+        this.cliente = new ClientePessoaFisica();
+        this.cliente.setUsuario(new Usuario());
+        ClientePFEndereco end = new ClientePFEndereco();
+        end.setCliente(this.cliente);
+        end.setEndereco(new Endereco());
+        end.getEndereco().setEstado(new Estado());
+        this.cliente.getEnderecos().add(end);
+        
+    }
+
+    /**
+     * Busca o endereço pelo CEP fazendo uso do webservice
+     *
+     * @param endereco
+     */
+    public void buscaCep(Endereco endereco) {
+        int i = this.buscaIndexEndereco(endereco);
+        String cep = endereco.getCep();
+        endereco = this.ejbEndereco.getByCep(endereco.getCep());
+        if(endereco == null){
+            CepWebService service = new CepWebService(ejbEstado);
+            endereco = service.getEnderecoByCep(cep);
+            if(endereco != null){
+                endereco = this.ejbEndereco.inserir(endereco);
+            }
+        }
+        this.cliente.getEnderecos().get(i).setEndereco(endereco);
+    }
+
+    private Integer buscaIndexEndereco(Endereco endereco){
+        ListIterator<ClientePFEndereco> i = this.cliente.getEnderecos().listIterator();
+        while(i.hasNext()){
+            int index = i.nextIndex();
+            Endereco end = i.next().getEndereco();
+            if(endereco.equals(end)){
+                return index;
+            }
+        }
+        return null;
     }
     
-    public Pessoa getPessoaJuridica() {
-        return pessoaJuridica;
-    }
-
-    public void setPessoaFisica(Pessoa pessoa) {
-        this.pessoaFisica = pessoa;
+    public String salvar(){
+        this.cliente.getUsuario().setRole(this.ejbRole.getById(6));
+        this.ejb.salvar(this.cliente);
+        this.clientes = ejb.listar();
+        resetAll();
+        
+        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Revendedor salvo com sucesso!", "Revendedor salvo com sucesso!");
+        FacesContext.getCurrentInstance().addMessage(null, fm);
+        
+        return "/private/cliente/listar.xhtml";
     }
     
-     public void setPessoaJuridica(Pessoa pessoa) {
-        this.pessoaJuridica = pessoa;
-    }
-
-    public String editarPessoaFisica(Pessoa pessoa) {
-        this.pessoaFisica = pessoa;
+    public String editar(ClientePessoaFisica cliente) {
+        this.cliente = cliente;
         return "/private/cliente/editar.xhtml";
     }
+    
+    public String confirm(ClientePessoaFisica cliente) {
+        this.cliente = cliente;
 
-    public String editarPessoaJuridica(Pessoa pessoa) {
-        this.pessoaFisica = pessoa;
-        return "/private/cliente/editar.xhtml";
-    }
-    
-    public String salvarPessoaFisica() {
-        this.ejb.salvar(this.pessoaFisica);
-        this.pessoaFisica = new PessoaFisica();
-        this.pessoas = ejb.listar();
-        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente salvo com sucesso!", "Cliente salvo com sucesso!");
-        FacesContext.getCurrentInstance().addMessage(null, fm);
-        return "/private/cliente/listar.xhtml";
-    }
-    
-     public String salvarPessoaJuridica() {
-        this.ejb.salvar(this.pessoaJuridica);
-        this.pessoaJuridica = new PessoaJuridica();
-        this.pessoas = ejb.listar();
-        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente salvo com sucesso!", "Cliente salvo com sucesso!");
-        FacesContext.getCurrentInstance().addMessage(null, fm);
-        return "/private/cliente/listar.xhtml";
+        return "/private/cliente/confirm.xhtml";
     }
 
-    public String apagarPessoaFisica(Pessoa pessoa) {
-        this.ejb.apagar(pessoa);
-        this.pessoas = ejb.listar();
-        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente excluído com sucesso!", "Cliente excluído com sucesso!");
-        FacesContext.getCurrentInstance().addMessage(null, fm);
-        return "/private/cliente/listar.xhtml";
-    }
-    
-    public String apagarPessoaJuridica(Pessoa pessoa) {
-        this.ejb.apagar(pessoa);
-        this.pessoas = ejb.listar();
-        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente excluído com sucesso!", "Cliente excluído com sucesso!");
-        FacesContext.getCurrentInstance().addMessage(null, fm);
+    public String apagar(boolean confirm) {
+        if (confirm) {
+            FacesMessage fm;
+
+            if (this.ejb.apagar(this.cliente)) {
+                this.clientes = ejb.listar();
+                fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Revendedor excluído com sucesso!", "Revendedor excluído com sucesso!");
+            } else {
+                fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao excluir cliente!", "Erro ao excluir cliente!");
+
+            }
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+        }
+
+        
+        this.cliente = new ClientePessoaFisica();
+
         return "/private/cliente/listar.xhtml";
     }
 }
