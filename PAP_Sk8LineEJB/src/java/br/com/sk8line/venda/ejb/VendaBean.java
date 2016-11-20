@@ -36,4 +36,9 @@ public class VendaBean implements VendaRemote {
             return false;
         }
     }
+
+    @Override
+    public Venda getById(int id) {
+        return VendaDAO.getInstance().getById(id);
+    }
 }

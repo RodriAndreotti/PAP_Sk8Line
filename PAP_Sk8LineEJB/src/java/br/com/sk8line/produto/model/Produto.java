@@ -4,6 +4,7 @@ package br.com.sk8line.produto.model;
 
 import br.com.sk8line.garantia.model.TermoGarantia;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +21,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "produto")
 public class Produto implements Serializable {
+
+    private static final long serialVersionUID = -3710183666062195577L;
     
     
     @Id
@@ -120,7 +123,63 @@ public class Produto implements Serializable {
         estoque.setProduto(this);
         this.estoque = estoque;
     }
-    
-    
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + this.id;
+        hash = 83 * hash + Objects.hashCode(this.nome);
+        hash = 83 * hash + Objects.hashCode(this.descricao);
+        hash = 83 * hash + Objects.hashCode(this.termoGarantia);
+        hash = 83 * hash + (int) (Double.doubleToLongBits(this.largura) ^ (Double.doubleToLongBits(this.largura) >>> 32));
+        hash = 83 * hash + (int) (Double.doubleToLongBits(this.altura) ^ (Double.doubleToLongBits(this.altura) >>> 32));
+        hash = 83 * hash + (int) (Double.doubleToLongBits(this.comprimento) ^ (Double.doubleToLongBits(this.comprimento) >>> 32));
+        hash = 83 * hash + (int) (Double.doubleToLongBits(this.valor) ^ (Double.doubleToLongBits(this.valor) >>> 32));
+        hash = 83 * hash + Objects.hashCode(this.estoque);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Produto other = (Produto) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.largura) != Double.doubleToLongBits(other.largura)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.altura) != Double.doubleToLongBits(other.altura)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.comprimento) != Double.doubleToLongBits(other.comprimento)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.valor) != Double.doubleToLongBits(other.valor)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        if (!Objects.equals(this.termoGarantia, other.termoGarantia)) {
+            return false;
+        }
+        if (!Objects.equals(this.estoque, other.estoque)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 }

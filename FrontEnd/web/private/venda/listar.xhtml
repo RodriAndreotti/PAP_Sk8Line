@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:body>
         <ui:composition template="/private/template/template.xhtml">
@@ -27,13 +28,18 @@
                         <h:outputText value="#{vendas.valorLiquido}"/>
                     </p:column>
                     <p:column headerText="Concretizada">
-                        <h:outputText value="#{vendas.concretizada}"/>
+                        <h:outputText value="#{(vendas.concretizada ? Sim : Não)}"/>
                     </p:column>
                     <p:column headerText="Desconto">
+                        <h:outputText value="#{vendas.desconto}"/>
+                    </p:column>
+                    <p:column headerText="Situação">
                         <h:outputText value="#{vendas.situacao}"/>
                     </p:column>
                     <p:column headerText="Data Venda">
-                        <h:outputText value="#{vendas.dataVenda}"/>
+                        <h:outputText value="#{vendas.dataVenda}">
+                            <f:convertDateTime timeStyle="full"  locale="pt_BR" dateStyle="long" pattern="dd/MM/yyyy HH:mm"/>
+                        </h:outputText>
                     </p:column>
                     <p:column headerText="">
                         <h:form>
@@ -44,5 +50,6 @@
                 </p:dataTable>
             </ui:define>
         </ui:composition>
+    </h:body>
 </html>
 

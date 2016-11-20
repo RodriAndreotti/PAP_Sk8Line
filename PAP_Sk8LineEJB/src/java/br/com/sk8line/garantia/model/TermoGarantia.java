@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Table(name = "termo_garantia")
 public class TermoGarantia implements Serializable{
 
+    private static final long serialVersionUID = -3652872628478117580L;
+
     @Id
     @Column(name = "id_termo_garantia")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,7 +57,15 @@ public class TermoGarantia implements Serializable{
         this.titulo = titulo;
     }
 
-    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.titulo);
+        hash = 79 * hash + this.periodo;
+        hash = 79 * hash + Objects.hashCode(this.termos);
+        return hash;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -83,6 +93,10 @@ public class TermoGarantia implements Serializable{
         }
         return true;
     }
+
+    
+
+    
 
     
 }

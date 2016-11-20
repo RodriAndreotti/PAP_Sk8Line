@@ -13,6 +13,8 @@ import java.io.Serializable;
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
 public class ColaboradorEnderecoPK implements Serializable{
+
+    private static final long serialVersionUID = -5212258250538038662L;
     private int endereco;
     private int colaborador;
     private int numero;

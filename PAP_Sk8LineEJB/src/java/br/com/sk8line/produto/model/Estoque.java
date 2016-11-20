@@ -3,6 +3,7 @@ package br.com.sk8line.produto.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
@@ -20,6 +21,8 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Estoque implements Serializable {
+
+    private static final long serialVersionUID = 548943536999675135L;
 
     @Id
     @Column(name = "id_estoque")
@@ -66,4 +69,44 @@ public class Estoque implements Serializable {
     public void setUltimaAtualizacao(Date ultimaAtualizacao) {
         this.ultimaAtualizacao = ultimaAtualizacao;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 61 * hash + this.id;
+        hash = 61 * hash + Objects.hashCode(this.produto);
+        hash = 61 * hash + this.quantidade;
+        hash = 61 * hash + Objects.hashCode(this.ultimaAtualizacao);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Estoque other = (Estoque) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.quantidade != other.quantidade) {
+            return false;
+        }
+        if (!Objects.equals(this.produto, other.produto)) {
+            return false;
+        }
+        if (!Objects.equals(this.ultimaAtualizacao, other.ultimaAtualizacao)) {
+            return false;
+        }
+        return true;
+    }
+
+   
+    
 }

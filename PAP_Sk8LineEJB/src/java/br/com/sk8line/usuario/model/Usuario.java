@@ -4,6 +4,7 @@ import br.com.sk8line.usuario.dao.UsuarioDAO;
 import br.com.sk8line.usuario.service.Password;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 
@@ -21,6 +22,8 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Usuario implements Serializable {
+
+    private static final long serialVersionUID = 2328228005207493411L;
 
     @Id
     @Column(name = "id_usuario")
@@ -115,5 +118,56 @@ public class Usuario implements Serializable {
         this.setSalt(passwd.getSalt());
         this.setSenha(passwd.encrypt(this.getSenha()));
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.email);
+        hash = 29 * hash + Objects.hashCode(this.senha);
+        hash = 29 * hash + Objects.hashCode(this.salt);
+        hash = 29 * hash + Objects.hashCode(this.role);
+        hash = 29 * hash + Objects.hashCode(this.ativo);
+        hash = 29 * hash + Objects.hashCode(this.dtUltimoAcesso);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.senha, other.senha)) {
+            return false;
+        }
+        if (!Objects.equals(this.salt, other.salt)) {
+            return false;
+        }
+        if (!Objects.equals(this.role, other.role)) {
+            return false;
+        }
+        if (!Objects.equals(this.ativo, other.ativo)) {
+            return false;
+        }
+        if (!Objects.equals(this.dtUltimoAcesso, other.dtUltimoAcesso)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
 }

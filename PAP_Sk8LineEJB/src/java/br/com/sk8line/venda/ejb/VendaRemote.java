@@ -16,7 +16,8 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface VendaRemote {
-     public Venda salvar(Venda venda);
+    public Venda salvar(Venda venda);
     public List<Venda> listar();
     public boolean apagar(Venda venda);
+    public Venda getById(int id);
 }

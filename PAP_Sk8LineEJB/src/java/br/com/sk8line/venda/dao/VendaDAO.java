@@ -57,7 +57,7 @@ public class VendaDAO extends DAO {
      * @return
      */
     public List<Venda> listar() {
-        return this.getEntityManager().createQuery("SELECT v FROM venda v", Venda.class).getResultList();
+        return this.getEntityManager().createNamedQuery("Venda.findAll", Venda.class).getResultList();
     }
 
     /**

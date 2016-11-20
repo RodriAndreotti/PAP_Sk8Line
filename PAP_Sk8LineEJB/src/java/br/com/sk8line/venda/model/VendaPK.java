@@ -14,48 +14,14 @@ import javax.persistence.Embeddable;
  * 
  * @author Rodrigo Teixeira Andreotti <ro.andriotti@gmail.com>
  */
-@Embeddable
+
 public class VendaPK implements Serializable{
-    @Column
+
+    private static final long serialVersionUID = -3788750784559875743L;
+    
     private int venda;
-    @Column
+
     private int produto;
-
-    public VendaPK() {
-    }
-
-    public VendaPK(int venda, int produto) {
-        this.venda = venda;
-        this.produto = produto;
-    }
-    
-    
-
-    @Override
-    public boolean equals(Object o) {
-        VendaPK vendaPk = (VendaPK) o;
-        
-        if(vendaPk.getVenda() != venda){
-            return false;
-        }
-        
-        if(vendaPk.getProduto() != produto){
-            return false;
-        }
-        
-        return true;
-        
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 61 * hash + this.venda;
-        hash = 61 * hash + this.produto;
-        return hash;
-    }
-    
-    
 
     public int getVenda() {
         return venda;
@@ -72,6 +38,37 @@ public class VendaPK implements Serializable{
     public void setProduto(int produto) {
         this.produto = produto;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + this.venda;
+        hash = 67 * hash + this.produto;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final VendaPK other = (VendaPK) obj;
+        if (this.venda != other.venda) {
+            return false;
+        }
+        if (this.produto != other.produto) {
+            return false;
+        }
+        return true;
+    }
+
+   
     
     
 }

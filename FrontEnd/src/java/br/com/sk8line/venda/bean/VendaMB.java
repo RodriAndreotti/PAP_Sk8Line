@@ -23,6 +23,7 @@ import javax.inject.Named;
 @Named(value = "vendaMB")
 @RequestScoped
 public class VendaMB {
+
     @EJB
     private VendaRemote ejb;
     private List<Venda> vendas = new ArrayList();
@@ -49,13 +50,13 @@ public class VendaMB {
     public void setVenda(Venda venda) {
         this.venda = venda;
     }
-    
+
     public String editar(Venda venda) {
         this.venda = venda;
         return "/private/venda/editar.xhtml";
     }
-    
-    public String salvar(){
+
+    public String salvar() {
         this.ejb.salvar(this.venda);
         this.venda = new Venda();
         this.vendas = ejb.listar();
@@ -63,8 +64,8 @@ public class VendaMB {
         FacesContext.getCurrentInstance().addMessage(null, fm);
         return "/private/venda/listar.xhtml";
     }
-    
-    public String apagar(Venda venda){
+
+    public String apagar(Venda venda) {
         this.ejb.apagar(venda);
         this.vendas = ejb.listar();
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Venda excluída com sucesso!", "Venda excluída com sucesso!");

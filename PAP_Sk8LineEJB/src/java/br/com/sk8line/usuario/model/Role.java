@@ -10,6 +10,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Role implements Serializable {
+
+    private static final long serialVersionUID = 5337398514053797962L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_role")
